@@ -1,0 +1,16 @@
+/* ===== PRODUCT PAGE STYLES ===== */
+/* Additional styles specific to the product detail page */
+
+.product-sticky-cta {
+  position: sticky;
+  bottom: 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  display: none; /* shows on scroll */
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+  z-index: 50;
+}
