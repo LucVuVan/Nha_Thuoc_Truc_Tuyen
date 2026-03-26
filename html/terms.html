@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Điều khoản sử dụng – NhàThuốc+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Be Vietnam Pro',sans-serif;background:#f5f9f6;color:#1a2e22}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        .site-header{background:#fff;border-bottom:1px solid #e8f5ee;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+        .site-header__inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .site-header__logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:1.1rem;font-weight:900;color:#065f46}
+        .site-header__nav{display:flex;align-items:center;gap:24px}
+        .site-header__nav a{font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;transition:color 0.2s}
+        .site-header__nav a:hover{color:#065f46}
+        .site-header__nav .btn-buy{background:#065f46;color:#fff;border-radius:10px;padding:8px 20px;font-weight:700}
+        .site-header__nav .btn-buy:hover{background:#047857;color:#fff}
+
+        /* HERO */
+        .page-hero{background:linear-gradient(125deg,#1e1b4b 0%,#3730a3 40%,#6366f1 70%,#818cf8 100%);padding:60px 0 76px;position:relative;overflow:hidden}
+        .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(255,255,255,0.07) 0%,transparent 60%)}
+        .page-hero::after{content:'';position:absolute;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,0.05);right:-60px;top:-100px}
+        .page-hero__inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:40px}
+        .page-hero__tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:999px;padding:5px 16px;font-size:0.75rem;font-weight:700;color:#fff;margin-bottom:16px}
+        .page-hero__title{font-size:2.4rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:12px;text-shadow:0 2px 24px rgba(0,0,0,0.2)}
+        .page-hero__title span{color:#a5b4fc}
+        .page-hero__desc{font-size:0.92rem;color:rgba(255,255,255,0.85);line-height:1.7;max-width:480px}
+        .page-hero__visual{font-size:7rem;flex-shrink:0;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3));animation:float 3.5s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+        .breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:#9ca3af;padding:16px 0}
+        .breadcrumb a{color:#065f46;text-decoration:none;font-weight:600}
+        .breadcrumb__sep{color:#d1d5db}
+
+        /* META */
+        .doc-meta{background:#fff;border-radius:16px;padding:20px 24px;border:1.5px solid #e5e7eb;display:flex;align-items:center;gap:24px;margin-bottom:32px;flex-wrap:wrap}
+        .doc-meta__item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:#6b7280}
+        .doc-meta__item strong{color:#1a2e22}
+        .doc-meta__sep{width:1px;height:20px;background:#e5e7eb}
+
+        /* LAYOUT */
+        .terms-layout{display:grid;grid-template-columns:220px 1fr;gap:28px;margin-bottom:64px}
+        .terms-nav{background:#fff;border-radius:18px;padding:20px;border:1.5px solid #f0f0f0;height:fit-content;position:sticky;top:80px}
+        .terms-nav__title{font-size:0.78rem;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+        .terms-nav__item{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:0.8rem;font-weight:600;color:#6b7280;transition:all 0.2s;margin-bottom:2px;text-decoration:none}
+        .terms-nav__item:hover,.terms-nav__item.active{background:#eef2ff;color:#4338ca}
+        .terms-nav__num{font-size:0.7rem;font-weight:800;color:#9ca3af;min-width:18px}
+
+        .terms-content{display:flex;flex-direction:column;gap:20px}
+        .terms-section{background:#fff;border-radius:18px;padding:32px;border:1.5px solid #f0f0f0;scroll-margin-top:80px}
+        .terms-section__num{font-size:0.72rem;font-weight:800;color:#6366f1;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+        .terms-section__title{font-size:1.05rem;font-weight:900;color:#1a2e22;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #f0fdf4}
+        .terms-section p{font-size:0.85rem;color:#4b5563;line-height:1.85;margin-bottom:12px}
+        .terms-section p:last-child{margin-bottom:0}
+        .terms-section ul{padding-left:0;list-style:none;margin:8px 0 12px}
+        .terms-section ul li{font-size:0.85rem;color:#4b5563;line-height:1.7;padding:5px 0 5px 20px;position:relative}
+        .terms-section ul li::before{content:'→';position:absolute;left:0;color:#6366f1;font-weight:700}
+
+        .highlight-box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:12px;padding:16px 18px;margin:12px 0;font-size:0.83rem;color:#0369a1;line-height:1.7}
+        .warning-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:16px 18px;margin:12px 0;font-size:0.83rem;color:#92400e;line-height:1.7;display:flex;gap:10px}
+        .warning-box__icon{font-size:1.1rem;flex-shrink:0}
+
+        /* ACCEPTANCE */
+        .acceptance-bar{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:16px;padding:24px 28px;border:1.5px solid #bbf7d0;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:32px;flex-wrap:wrap}
+        .acceptance-bar__text{font-size:0.88rem;color:#1a2e22;line-height:1.6;flex:1}
+        .acceptance-bar__text strong{color:#065f46}
+        .btn-accept{background:#065f46;color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:0.85rem;font-weight:800;cursor:pointer;font-family:inherit;transition:all 0.2s;white-space:nowrap}
+        .btn-accept:hover{background:#047857;transform:translateY(-1px)}
+
+        /* FOOTER */
+        .footer{background:#1a2e22}
+        .footer__main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding:48px 0 32px}
+        .footer__brand-name{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px}
+        .footer__brand-desc{font-size:0.82rem;color:#9ca3af;line-height:1.6}
+        .footer__col-title{font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:0.5px;text-transform:uppercase}
+        .footer__links{display:flex;flex-direction:column;gap:8px}
+        .footer__link{font-size:0.82rem;color:#9ca3af;text-decoration:none;transition:color 0.2s}
+        .footer__link:hover{color:#6ee7b7}
+        .footer__contact-item{font-size:0.82rem;color:#9ca3af;margin-bottom:6px}
+        .footer__contact-item span{color:#d1fae5;font-weight:600}
+        .footer__bottom{border-top:1px solid #2d4a38;padding:16px 0;text-align:center;font-size:0.78rem;color:#6b7280}
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header style="background:#fff;border-bottom:1px solid #e8f5ee;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+        <a href="index.html" style="text-decoration:none;font-size:1.1rem;font-weight:900;color:#065f46;font-family:'Be Vietnam Pro',sans-serif;">🛡️ NhàThuốc+</a>
+        <nav style="display:flex;align-items:center;gap:20px;">
+            <a href="index.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Trang chủ</a>
+            <a href="about.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Về chúng tôi</a>
+            <a href="contact.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Liên hệ</a>
+            <a href="faq.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">FAQ</a>
+            <a href="return-policy.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Đổi trả</a>
+            <a href="terms.html" style="font-size:0.85rem;font-weight:700;color:#065f46;text-decoration:none;border-bottom:2px solid #065f46;padding-bottom:2px;">Điều khoản</a>
+            <a href="index.html" style="background:#065f46;color:#fff;border-radius:10px;padding:8px 20px;font-size:0.85rem;font-weight:700;text-decoration:none;">Mua ngay</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero__inner">
+                <div>
+                    <div class="page-hero__tag">📜 Pháp lý & Điều khoản</div>
+                    <h1 class="page-hero__title">Điều khoản<br/><span>sử dụng dịch vụ</span></h1>
+                    <p class="page-hero__desc">Vui lòng đọc kỹ các điều khoản này trước khi sử dụng dịch vụ của NhàThuốc+. Việc sử dụng dịch vụ đồng nghĩa với việc bạn đồng ý với các điều khoản dưới đây.</p>
+                </div>
+                <div class="page-hero__visual">📜</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">🏠 Trang chủ</a>
+            <span class="breadcrumb__sep">›</span>
+            <span>Điều khoản sử dụng</span>
+        </div>
+
+        <!-- META -->
+        <div class="doc-meta">
+            <div class="doc-meta__item">📅 <span>Ngày hiệu lực: <strong>01/01/2026</strong></span></div>
+            <div class="doc-meta__sep"></div>
+            <div class="doc-meta__item">🔄 <span>Cập nhật lần cuối: <strong>22/03/2026</strong></span></div>
+            <div class="doc-meta__sep"></div>
+            <div class="doc-meta__item">📋 <span>Phiên bản: <strong>2.1</strong></span></div>
+            <div class="doc-meta__sep"></div>
+            <div class="doc-meta__item">🌐 <span>Áp dụng tại: <strong>Việt Nam</strong></span></div>
+        </div>
+
+        <!-- ACCEPTANCE -->
+        <div class="acceptance-bar">
+            <div class="acceptance-bar__text">
+                Bằng cách truy cập và sử dụng website NhàThuốc+, bạn xác nhận đã đọc, hiểu và <strong>đồng ý với tất cả các điều khoản</strong> được nêu trong tài liệu này.
+            </div>
+            <button class="btn-accept" onclick="this.textContent='✅ Đã xác nhận';this.style.background='#047857'">Tôi đồng ý</button>
+        </div>
+
+        <div class="terms-layout">
+            <!-- NAV -->
+            <aside class="terms-nav">
+                <div class="terms-nav__title">Mục lục</div>
+                <a href="#t1" class="terms-nav__item active"><span class="terms-nav__num">01</span>Giới thiệu</a>
+                <a href="#t2" class="terms-nav__item"><span class="terms-nav__num">02</span>Tài khoản người dùng</a>
+                <a href="#t3" class="terms-nav__item"><span class="terms-nav__num">03</span>Đặt hàng & Thanh toán</a>
+                <a href="#t4" class="terms-nav__item"><span class="terms-nav__num">04</span>Quyền & Nghĩa vụ</a>
+                <a href="#t5" class="terms-nav__item"><span class="terms-nav__num">05</span>Bảo mật thông tin</a>
+                <a href="#t6" class="terms-nav__item"><span class="terms-nav__num">06</span>Sở hữu trí tuệ</a>
+                <a href="#t7" class="terms-nav__item"><span class="terms-nav__num">07</span>Giới hạn trách nhiệm</a>
+                <a href="#t8" class="terms-nav__item"><span class="terms-nav__num">08</span>Thay đổi điều khoản</a>
+                <a href="#t9" class="terms-nav__item"><span class="terms-nav__num">09</span>Liên hệ</a>
+            </aside>
+
+            <!-- CONTENT -->
+            <div class="terms-content">
+
+                <div class="terms-section" id="t1">
+                    <div class="terms-section__num">Điều khoản 01</div>
+                    <div class="terms-section__title">Giới thiệu về NhàThuốc+</div>
+                    <p>NhàThuốc+ là nền tảng thương mại điện tử chuyên cung cấp dược phẩm, thực phẩm chức năng và thiết bị y tế tại Việt Nam. Chúng tôi hoạt động dưới sự quản lý của Bộ Y tế và tuân thủ đầy đủ các quy định pháp luật về kinh doanh dược phẩm.</p>
+                    <p>Các điều khoản này điều chỉnh mối quan hệ giữa NhàThuốc+ và người dùng khi sử dụng website, ứng dụng di động và các dịch vụ liên quan.</p>
+                    <div class="highlight-box">📌 NhàThuốc+ được cấp phép kinh doanh dược phẩm số: GPKD-2024-xxxx do Sở Y tế Hà Nội cấp ngày 01/01/2024.</div>
+                </div>
+
+                <div class="terms-section" id="t2">
+                    <div class="terms-section__num">Điều khoản 02</div>
+                    <div class="terms-section__title">Tài khoản người dùng</div>
+                    <p>Để sử dụng đầy đủ tính năng của NhàThuốc+, bạn có thể tạo tài khoản cá nhân. Khi tạo tài khoản, bạn cam kết:</p>
+                    <ul>
+                        <li>Cung cấp thông tin chính xác, đầy đủ và cập nhật</li>
+                        <li>Bảo mật mật khẩu và không chia sẻ tài khoản với người khác</li>
+                        <li>Thông báo ngay cho chúng tôi nếu phát hiện truy cập trái phép</li>
+                        <li>Chịu trách nhiệm về mọi hoạt động phát sinh từ tài khoản của bạn</li>
+                    </ul>
+                    <div class="warning-box"><div class="warning-box__icon">⚠️</div><div>NhàThuốc+ có quyền tạm khóa hoặc xóa tài khoản nếu phát hiện vi phạm điều khoản hoặc có hành vi gian lận.</div></div>
+                </div>
+
+                <div class="terms-section" id="t3">
+                    <div class="terms-section__num">Điều khoản 03</div>
+                    <div class="terms-section__title">Đặt hàng & Thanh toán</div>
+                    <p>Khi đặt hàng trên NhàThuốc+, bạn xác nhận:</p>
+                    <ul>
+                        <li>Thông tin đặt hàng là chính xác bao gồm địa chỉ giao hàng và số điện thoại liên hệ</li>
+                        <li>Bạn đủ 18 tuổi hoặc có sự đồng ý của người giám hộ hợp pháp</li>
+                        <li>Sản phẩm được mua cho mục đích sử dụng cá nhân, không phải để bán lại trái phép</li>
+                        <li>Thanh toán được thực hiện đầy đủ theo phương thức đã chọn</li>
+                    </ul>
+                    <p>Đơn hàng được xác nhận sau khi chúng tôi gửi email/SMS xác nhận. NhàThuốc+ có quyền từ chối đơn hàng nếu sản phẩm hết hàng, thông tin không hợp lệ hoặc có dấu hiệu gian lận.</p>
+                </div>
+
+                <div class="terms-section" id="t4">
+                    <div class="terms-section__num">Điều khoản 04</div>
+                    <div class="terms-section__title">Quyền và Nghĩa vụ các bên</div>
+                    <p><strong>Quyền của người dùng:</strong></p>
+                    <ul>
+                        <li>Được cung cấp thông tin đầy đủ, chính xác về sản phẩm</li>
+                        <li>Được bảo mật thông tin cá nhân theo quy định</li>
+                        <li>Được đổi trả sản phẩm theo chính sách đổi trả</li>
+                        <li>Được tư vấn miễn phí từ dược sĩ chuyên nghiệp</li>
+                    </ul>
+                    <p><strong>Nghĩa vụ của người dùng:</strong></p>
+                    <ul>
+                        <li>Không sử dụng dịch vụ cho mục đích bất hợp pháp</li>
+                        <li>Không đăng tải nội dung sai lệch, gây hiểu nhầm</li>
+                        <li>Không can thiệp vào hệ thống kỹ thuật của NhàThuốc+</li>
+                        <li>Tuân thủ các quy định pháp luật Việt Nam</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section" id="t5">
+                    <div class="terms-section__num">Điều khoản 05</div>
+                    <div class="terms-section__title">Bảo mật thông tin cá nhân</div>
+                    <p>NhàThuốc+ cam kết bảo vệ thông tin cá nhân của bạn theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân. Chúng tôi thu thập và sử dụng thông tin để:</p>
+                    <ul>
+                        <li>Xử lý đơn hàng và giao hàng đến bạn</li>
+                        <li>Liên lạc về đơn hàng, khuyến mãi và hỗ trợ khách hàng</li>
+                        <li>Cải thiện dịch vụ và trải nghiệm người dùng</li>
+                        <li>Tuân thủ các yêu cầu pháp lý khi cần thiết</li>
+                    </ul>
+                    <div class="highlight-box">🔒 Chúng tôi KHÔNG bán hoặc chia sẻ thông tin cá nhân của bạn cho bên thứ ba vì mục đích thương mại mà không có sự đồng ý của bạn.</div>
+                </div>
+
+                <div class="terms-section" id="t6">
+                    <div class="terms-section__num">Điều khoản 06</div>
+                    <div class="terms-section__title">Sở hữu trí tuệ</div>
+                    <p>Toàn bộ nội dung trên website NhàThuốc+ bao gồm logo, hình ảnh, văn bản, thiết kế giao diện và mã nguồn là tài sản của NhàThuốc+ hoặc được cấp phép sử dụng hợp pháp.</p>
+                    <p>Bạn không được phép sao chép, phân phối, chỉnh sửa hoặc sử dụng cho mục đích thương mại mà không có sự cho phép bằng văn bản của chúng tôi.</p>
+                </div>
+
+                <div class="terms-section" id="t7">
+                    <div class="terms-section__num">Điều khoản 07</div>
+                    <div class="terms-section__title">Giới hạn trách nhiệm</div>
+                    <p>NhàThuốc+ không chịu trách nhiệm với các thiệt hại phát sinh từ:</p>
+                    <ul>
+                        <li>Sự cố kỹ thuật ngoài tầm kiểm soát (thiên tai, mất điện, tấn công mạng)</li>
+                        <li>Việc sử dụng sản phẩm không đúng hướng dẫn của nhà sản xuất</li>
+                        <li>Thông tin do người dùng cung cấp không chính xác</li>
+                        <li>Các liên kết đến website bên thứ ba</li>
+                    </ul>
+                    <div class="warning-box"><div class="warning-box__icon">⚠️</div><div>Thông tin tư vấn từ dược sĩ mang tính tham khảo, không thay thế chỉ định điều trị của bác sĩ. Vui lòng tham khảo ý kiến bác sĩ trước khi sử dụng thuốc.</div></div>
+                </div>
+
+                <div class="terms-section" id="t8">
+                    <div class="terms-section__num">Điều khoản 08</div>
+                    <div class="terms-section__title">Thay đổi điều khoản</div>
+                    <p>NhàThuốc+ có quyền cập nhật các điều khoản này bất kỳ lúc nào. Khi có thay đổi quan trọng, chúng tôi sẽ:</p>
+                    <ul>
+                        <li>Thông báo qua email đến tài khoản đã đăng ký</li>
+                        <li>Hiển thị thông báo nổi bật trên website ít nhất 7 ngày trước khi có hiệu lực</li>
+                        <li>Cập nhật ngày "Cập nhật lần cuối" ở đầu tài liệu</li>
+                    </ul>
+                    <p>Việc tiếp tục sử dụng dịch vụ sau khi điều khoản có hiệu lực đồng nghĩa bạn chấp nhận các thay đổi đó.</p>
+                </div>
+
+                <div class="terms-section" id="t9">
+                    <div class="terms-section__num">Điều khoản 09</div>
+                    <div class="terms-section__title">Liên hệ & Giải quyết tranh chấp</div>
+                    <p>Nếu có thắc mắc về điều khoản hoặc cần hỗ trợ pháp lý, vui lòng liên hệ:</p>
+                    <ul>
+                        <li>Email pháp lý: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d61686a6c614d63656c796578626e237b63">[email&#160;protected]</a></li>
+                        <li>Hotline: 1900 xxxx (Thứ 2 – Thứ 6, 8:00–17:00)</li>
+                        <li>Địa chỉ: 123 Đường Láng, Đống Đa, Hà Nội</li>
+                    </ul>
+                    <p>Mọi tranh chấp sẽ được giải quyết thông qua thương lượng. Nếu không đạt được thỏa thuận, tranh chấp sẽ được đưa ra Tòa án nhân dân có thẩm quyền tại Hà Nội theo pháp luật Việt Nam.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer style="background:#1a2e22;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding:48px 0 32px;">
+            <div>
+                <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">🛡️ NhàThuốc+</div>
+                <p style="font-size:0.82rem;color:#9ca3af;line-height:1.6;">Hệ thống nhà thuốc trực tuyến uy tín — giao thuốc tận nhà trong 2 giờ.</p>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Thông tin</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="about.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Về chúng tôi</a>
+                    <a href="contact.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Liên hệ</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Hỗ trợ</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="faq.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Câu hỏi thường gặp</a>
+                    <a href="return-policy.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Chính sách đổi trả</a>
+                    <a href="terms.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Điều khoản sử dụng</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Liên hệ</div>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Hotline: <span style="color:#d1fae5;font-weight:600;">1900 xxxx</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Email: <span style="color:#d1fae5;font-weight:600;">support@nhathuoc.vn</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;">Giờ làm việc: <span style="color:#d1fae5;font-weight:600;">24/7</span></p>
+            </div>
+        </div>
+        <div style="border-top:1px solid #2d4a38;padding:16px 0;text-align:center;font-size:0.78rem;color:#6b7280;">© 2026 NhàThuốc+. Tất cả quyền được bảo lưu.</div>
+    </div>
+</footer>
+</body>
+</html>

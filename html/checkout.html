@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh toán – NhàThuốc+</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/checkout.css" />
+</head>
+<body>
+
+<!-- HEADER CHECKOUT -->
+<header class="header-checkout">
+    <div class="header-checkout__inner">
+        <a href="index.html" style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--primary)">
+            🛡️ NhàThuốc+
+        </a>
+        <nav class="header-checkout__nav">
+            <a href="cart.html" class="header-checkout__link">Giỏ hàng</a>
+            <span class="header-checkout__link active">Thanh toán</span>
+        </nav>
+        <a href="cart.html" class="header__icon-btn" style="margin-left:auto">
+            🛒<span class="header__cart-badge" id="cart-badge-header">0</span>
+        </a>
+    </div>
+</header>
+
+<main>
+    <div class="container section">
+
+        <!-- Steps -->
+        <div class="steps-bar">
+            <div class="step done">
+                <div class="step__num">✓</div>
+                <span>Giỏ hàng</span>
+            </div>
+            <div class="step-connector done"></div>
+            <div class="step active">
+                <div class="step__num">2</div>
+                <span>Thông tin giao hàng</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step">
+                <div class="step__num">3</div>
+                <span>Xác nhận</span>
+            </div>
+        </div>
+
+        <div class="checkout-layout">
+
+            <!-- Form -->
+            <div>
+                <!-- Shipping info -->
+                <div class="form-section">
+                    <div class="form-section__title">📍 Thông tin giao hàng</div>
+                    <div class="form-section__body">
+                        <div class="form-group">
+                            <label class="form-label required">Họ và tên</label>
+                            <input type="text" id="input-name" class="form-control" placeholder="Nguyễn Văn A" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Số điện thoại</label>
+                            <input type="tel" id="input-phone" class="form-control" placeholder="0901234567" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Địa chỉ chi tiết</label>
+                            <textarea id="input-address" class="form-control form-textarea"
+                                      placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ghi chú (Tùy chọn)</label>
+                            <textarea id="input-note" class="form-control form-textarea form-textarea-short"
+                                      placeholder="Ghi chú cho đơn hàng (ví dụ: giao hàng giờ hành chính)"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment -->
+                <div class="form-section">
+                    <div class="form-section__title">💳 Phương thức thanh toán</div>
+                    <div class="payment-options">
+                        <label class="payment-option selected" onclick="selectPayment(this)" data-method="cod">
+                            <input type="radio" name="payment" value="cod" checked />
+                            <span class="payment-option__icon">💵</span>
+                            <div class="payment-option__info">
+                                <div class="payment-option__name">Thanh toán khi nhận hàng (COD)</div>
+                                <div class="payment-option__desc">Thanh toán bằng tiền mặt khi nhận hàng</div>
+                            </div>
+                        </label>
+                        <label class="payment-option" onclick="selectPayment(this)" data-method="ewallet">
+                            <input type="radio" name="payment" value="ewallet" />
+                            <span class="payment-option__icon">📱</span>
+                            <div class="payment-option__info">
+                                <div class="payment-option__name">Ví điện tử (MoMo, ZaloPay…)</div>
+                                <div class="payment-option__desc">Thanh toán nhanh qua ví điện tử</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order summary sidebar -->
+            <div class="checkout-order">
+                <div class="checkout-order__header" id="order-header">🧾 Đơn hàng</div>
+                <div class="checkout-order__items" id="order-items">
+                    <!-- render by checkout.js -->
+                </div>
+                <div class="checkout-order__summary">
+                    <div class="checkout-order__row">
+                        <span>Tạm tính</span>
+                        <span id="order-subtotal">0đ</span>
+                    </div>
+                    <div class="checkout-order__row">
+                        <span>Phí giao hàng</span>
+                        <span id="order-shipping">25.000đ</span>
+                    </div>
+                    <div class="checkout-order__row total">
+                        <span>Tổng cộng</span>
+                        <span id="order-total">0đ</span>
+                    </div>
+                </div>
+                <div class="checkout-order__cta">
+                    <button class="btn btn-primary btn-full btn-lg" onclick="placeOrder()">Đặt hàng</button>
+                    <p class="checkout-terms">
+                        Bằng việc đặt hàng, bạn đồng ý với <a href="#">Điều khoản sử dụng</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- QR Modal -->
+<div id="qr-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:20px;padding:32px;max-width:360px;width:90%;text-align:center;position:relative;">
+        <button onclick="closeQR()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#888">✕</button>
+        <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:4px">Quét mã QR để thanh toán</div>
+        <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:20px">Mở app MoMo hoặc ZaloPay để quét</div>
+        <!-- QR image -->
+        <img src="../image/qr.webp" alt="QR Code thanh toán"
+             style="width:220px;height:220px;border-radius:12px;object-fit:contain;margin:0 auto 16px;display:block;" />
+        <div id="qr-total" style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--primary);margin-bottom:20px"></div>
+        <button onclick="confirmQR()" class="btn btn-primary btn-full">✅ Tôi đã thanh toán xong</button>
+    </div>
+</div>
+
+
+<script src="../js/main.js"></script>
+<script src="../js/checkout.js"></script>
+</body>
+</html>

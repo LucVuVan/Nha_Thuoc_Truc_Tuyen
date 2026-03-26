@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đặt hàng thành công – NhàThuốc+</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        .confirm-wrap {
+          max-width: 560px;
+          margin: 60px auto;
+          text-align: center;
+        }
+        .confirm-icon {
+          width: 88px; height: 88px;
+          background: #dcfce7;
+          border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 2.6rem;
+          margin: 0 auto 24px;
+        }
+        .confirm-title {
+          font-family: var(--font-display);
+          font-size: 1.6rem; font-weight: 800;
+          color: var(--text-primary); margin-bottom: 10px;
+        }
+        .confirm-desc {
+          font-size: 0.9rem; color: var(--text-secondary);
+          line-height: 1.7; margin-bottom: 32px;
+        }
+        .confirm-code {
+          display: inline-block;
+          background: var(--primary-light);
+          color: var(--primary);
+          border-radius: var(--radius-lg);
+          padding: 10px 24px;
+          font-family: var(--font-display);
+          font-weight: 700; font-size: 1rem;
+          margin-bottom: 32px;
+          letter-spacing: 1px;
+        }
+        .confirm-actions {
+          display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+        }
+        .confirm-steps {
+          background: #fff;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-xl);
+          padding: 28px 32px;
+          margin-bottom: 32px;
+          text-align: left;
+        }
+        .confirm-steps__title {
+          font-family: var(--font-display);
+          font-weight: 700; font-size: 0.95rem;
+          margin-bottom: 16px; color: var(--text-primary);
+        }
+        .confirm-step {
+          display: flex; align-items: flex-start; gap: 14px;
+          margin-bottom: 14px;
+        }
+        .confirm-step:last-child { margin-bottom: 0; }
+        .confirm-step__num {
+          width: 28px; height: 28px; min-width: 28px;
+          background: var(--primary); color: #fff;
+          border-radius: 50%; display: flex; align-items: center;
+          justify-content: center; font-size: 0.78rem; font-weight: 700;
+        }
+        .confirm-step__text { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.5; }
+        .confirm-step__text strong { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header-checkout">
+    <div class="header-checkout__inner">
+        <a href="index.html" style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--primary)">
+            🛡️ NhàThuốc+
+        </a>
+        <nav class="header-checkout__nav">
+            <span class="header-checkout__link">Giỏ hàng</span>
+            <span class="header-checkout__link">Thanh toán</span>
+            <span class="header-checkout__link active">Xác nhận</span>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container section">
+        <div class="confirm-wrap">
+
+            <div class="confirm-icon">✅</div>
+            <div class="confirm-title">Đặt hàng thành công!</div>
+            <div class="confirm-desc">
+                Cảm ơn bạn đã tin tưởng NhàThuốc+.<br/>
+                Đơn hàng của bạn đã được tiếp nhận và đang được xử lý.
+            </div>
+
+            <div class="confirm-code" id="order-code">NTP-000000</div>
+
+            <div class="confirm-steps">
+                <div class="confirm-steps__title">📦 Điều gì sẽ xảy ra tiếp theo?</div>
+                <div class="confirm-step">
+                    <div class="confirm-step__num">1</div>
+                    <div class="confirm-step__text"><strong>Xác nhận đơn hàng</strong><br/>Dược sĩ sẽ kiểm tra và xác nhận đơn trong vòng 15 phút</div>
+                </div>
+                <div class="confirm-step">
+                    <div class="confirm-step__num">2</div>
+                    <div class="confirm-step__text"><strong>Chuẩn bị hàng</strong><br/>Đơn hàng được đóng gói cẩn thận và bàn giao cho shipper</div>
+                </div>
+                <div class="confirm-step">
+                    <div class="confirm-step__num">3</div>
+                    <div class="confirm-step__text"><strong>Giao hàng tận nhà</strong><br/>Shipper sẽ giao hàng trong <strong>2 giờ</strong> kể từ khi xác nhận</div>
+                </div>
+            </div>
+
+            <div class="confirm-actions">
+                <a href="orders.html" class="btn btn-primary btn-lg">Xem đơn hàng của tôi</a>
+                <a href="index.html" class="btn btn-ghost btn-lg">Tiếp tục mua sắm</a>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<script src="../js/main.js"></script>
+<script>
+    // Lấy key theo user hiện tại
+    function getUserKey(key) {
+        try {
+            const user = JSON.parse(localStorage.getItem('ntp_user') || 'null');
+            const email = user?.email || 'guest';
+            return key + '_' + email;
+        } catch { return key + '_guest'; }
+    }
+
+    // Lấy mã đơn hàng mới nhất theo đúng user
+    const orders = JSON.parse(localStorage.getItem(getUserKey('ntp_orders')) || '[]');
+    const lastOrder = orders[0];
+    if (lastOrder) {
+        document.getElementById('order-code').textContent = '#' + lastOrder.id;
+    } else {
+        document.getElementById('order-code').textContent = 'NTP-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+</script>
+</body>
+</html>

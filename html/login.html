@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập / Đăng ký – NhàThuốc+</title>
+    <link rel="stylesheet" href="../css/pages/login.css" />
+</head>
+<body>
+
+<div class="auth-card">
+    <!-- Tabs -->
+    <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login')">Đăng nhập</button>
+        <button class="auth-tab"        onclick="switchTab('register')">Đăng ký</button>
+    </div>
+
+    <!-- LOGIN PANEL -->
+    <div class="auth-panel active" id="panel-login">
+        <div class="auth-panel__title">Chào mừng trở lại!</div>
+        <div class="auth-panel__sub">Đăng nhập để mua thuốc dễ dàng hơn</div>
+        <form onsubmit="handleLogin(event)">
+            <div class="field">
+                <label>Email</label>
+                <input type="text" placeholder="example@email.com" autocomplete="username" />
+            </div>
+            <div class="field">
+                <label>Mật khẩu</label>
+                <div class="pw-wrap">
+                    <input type="password" id="pw-login" placeholder="••••••••" autocomplete="current-password" />
+                    <button type="button" class="pw-toggle" onclick="togglePw('pw-login', this)">👁</button>
+                </div>
+            </div>
+            <div class="row-check-forgot">
+                <label class="check-label">
+                    <input type="checkbox" /> Ghi nhớ đăng nhập
+                </label>
+                <a href="#" class="forgot-link">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="btn-submit">Đăng nhập</button>
+        </form>
+    </div>
+
+    <!-- REGISTER PANEL -->
+    <div class="auth-panel" id="panel-register">
+        <div class="auth-panel__title">Tạo tài khoản mới</div>
+        <div class="auth-panel__sub">Tham gia NhàThuốc+ ngay hôm nay</div>
+        <form onsubmit="handleRegister(event)">
+            <div class="field">
+                <label>Họ và tên</label>
+                <input type="text" placeholder="Nguyễn Văn A" />
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" placeholder="example@email.com" autocomplete="email" />
+            </div>
+            <div class="field">
+                <label>Mật khẩu</label>
+                <div class="pw-wrap">
+                    <input type="password" id="pw-reg" placeholder="••••••••" autocomplete="new-password" />
+                    <button type="button" class="pw-toggle" onclick="togglePw('pw-reg', this)">👁</button>
+                </div>
+            </div>
+            <div class="field">
+                <label>Vai trò</label>
+                <div class="select-wrap">
+                    <select>
+                        <option value="">-- Chọn vai trò --</option>
+                        <option value="customer">Khách hàng</option>
+                        <option value="pharmacist">Dược sĩ</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">Tạo tài khoản</button>
+        </form>
+    </div>
+</div>
+
+<script src="../js/login.js"></script>
+</body>
+</html>

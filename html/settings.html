@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cài đặt tài khoản – NhàThuốc+</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/settings.css" />
+    <link rel="stylesheet" href="../css/pages/orders.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="orders-header-bar">
+    <div class="orders-header-bar__inner">
+        <a href="index.html" class="orders-back">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Trang chủ
+        </a>
+        <span class="orders-header-bar__title">Cài đặt tài khoản</span>
+        <div style="width:80px"></div>
+    </div>
+</header>
+
+<div class="settings-page">
+    <div class="settings-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="settings-sidebar">
+            <!-- Avatar -->
+            <div class="settings-avatar-block">
+                <div class="settings-avatar" id="avatarDisplay">H</div>
+                <div class="settings-avatar-block__name" id="sidebarName">Người dùng</div>
+                <div class="settings-avatar-block__email" id="sidebarEmail">email@example.com</div>
+            </div>
+
+            <!-- Nav -->
+            <nav class="settings-nav">
+                <button class="settings-nav__item active" data-section="profile">
+                    <span class="settings-nav__icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </span>
+                    Thông tin cá nhân
+                </button>
+                <button class="settings-nav__item" data-section="password">
+                    <span class="settings-nav__icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </span>
+                    Đổi mật khẩu
+                </button>
+                <button class="settings-nav__item" data-section="address">
+                    <span class="settings-nav__icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
+                    Địa chỉ giao hàng
+                </button>
+                <button class="settings-nav__item" data-section="notifications">
+                    <span class="settings-nav__icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    </span>
+                    Thông báo & Tuỳ chọn
+                </button>
+            </nav>
+
+            <button class="settings-logout" onclick="logout()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Đăng xuất
+            </button>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="settings-content">
+
+            <!-- ── THÔNG TIN CÁ NHÂN ── -->
+            <section class="settings-section active" id="section-profile">
+                <div class="settings-section__header">
+                    <div class="settings-section__title">Thông tin cá nhân</div>
+                    <div class="settings-section__desc">Cập nhật tên, email và số điện thoại của bạn</div>
+                </div>
+                <div class="settings-card">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Họ và tên</label>
+                            <input type="text" id="profileName" class="form-control" placeholder="Nguyễn Văn A" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Số điện thoại</label>
+                            <input type="tel" id="profilePhone" class="form-control" placeholder="0901234567" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Email</label>
+                        <input type="email" id="profileEmail" class="form-control" placeholder="email@example.com" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ngày sinh</label>
+                        <input type="date" id="profileDob" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Giới tính</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="male" /> Nam
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="female" /> Nữ
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="other" /> Khác
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveProfile()">Lưu thay đổi</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── ĐỔI MẬT KHẨU ── -->
+            <section class="settings-section" id="section-password">
+                <div class="settings-section__header">
+                    <div class="settings-section__title">Đổi mật khẩu</div>
+                    <div class="settings-section__desc">Sử dụng mật khẩu mạnh để bảo vệ tài khoản</div>
+                </div>
+                <div class="settings-card">
+                    <div class="form-group">
+                        <label class="form-label required">Mật khẩu hiện tại</label>
+                        <div class="input-password-wrap">
+                            <input type="password" id="currentPwd" class="form-control" placeholder="Nhập mật khẩu hiện tại" />
+                            <button class="toggle-password" type="button">👁</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Mật khẩu mới</label>
+                        <div class="input-password-wrap">
+                            <input type="password" id="newPwd" class="form-control" placeholder="Tối thiểu 8 ký tự" />
+                            <button class="toggle-password" type="button">👁</button>
+                        </div>
+                        <div class="pwd-strength" id="pwdStrength"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Xác nhận mật khẩu mới</label>
+                        <div class="input-password-wrap">
+                            <input type="password" id="confirmPwd" class="form-control" placeholder="Nhập lại mật khẩu mới" />
+                            <button class="toggle-password" type="button">👁</button>
+                        </div>
+                    </div>
+                    <div class="pwd-tips">
+                        <div class="pwd-tip" id="tip-len">✗ Ít nhất 8 ký tự</div>
+                        <div class="pwd-tip" id="tip-upper">✗ Có chữ hoa</div>
+                        <div class="pwd-tip" id="tip-num">✗ Có số</div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="savePassword()">Cập nhật mật khẩu</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── ĐỊA CHỈ GIAO HÀNG ── -->
+            <section class="settings-section" id="section-address">
+                <div class="settings-section__header">
+                    <div class="settings-section__title">Địa chỉ giao hàng</div>
+                    <div class="settings-section__desc">Quản lý các địa chỉ nhận hàng của bạn</div>
+                </div>
+
+                <!-- Danh sách địa chỉ -->
+                <div id="addressList"></div>
+
+                <!-- Thêm địa chỉ mới -->
+                <div class="settings-card" id="addAddressCard">
+                    <div class="settings-card__subtitle">➕ Thêm địa chỉ mới</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Họ tên người nhận</label>
+                            <input type="text" id="addrName" class="form-control" placeholder="Nguyễn Văn A" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Số điện thoại</label>
+                            <input type="tel" id="addrPhone" class="form-control" placeholder="0901234567" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Địa chỉ chi tiết</label>
+                        <textarea id="addrDetail" class="form-control form-textarea" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="addrDefault" />
+                            <span>Đặt làm địa chỉ mặc định</span>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="addAddress()">Lưu địa chỉ</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── THÔNG BÁO & TUỲ CHỌN ── -->
+            <section class="settings-section" id="section-notifications">
+                <div class="settings-section__header">
+                    <div class="settings-section__title">Thông báo & Tuỳ chọn</div>
+                    <div class="settings-section__desc">Kiểm soát cách bạn nhận thông báo</div>
+                </div>
+                <div class="settings-card">
+                    <div class="settings-card__subtitle">📱 Thông báo đơn hàng</div>
+                    <div class="toggle-row">
+                        <div class="toggle-row__info">
+                            <div class="toggle-row__title">Xác nhận đơn hàng</div>
+                            <div class="toggle-row__desc">Nhận thông báo khi đơn được xác nhận</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="notif-order-confirm" checked />
+                            <span class="switch__track"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-row__info">
+                            <div class="toggle-row__title">Cập nhật vận chuyển</div>
+                            <div class="toggle-row__desc">Thông báo khi đơn hàng đang được giao</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="notif-shipping" checked />
+                            <span class="switch__track"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-row__info">
+                            <div class="toggle-row__title">Giao hàng thành công</div>
+                            <div class="toggle-row__desc">Thông báo khi đơn hàng đã được giao</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="notif-delivered" checked />
+                            <span class="switch__track"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card" style="margin-top:16px">
+                    <div class="settings-card__subtitle">🎁 Khuyến mãi & Ưu đãi</div>
+                    <div class="toggle-row">
+                        <div class="toggle-row__info">
+                            <div class="toggle-row__title">Flash Sale & Giảm giá</div>
+                            <div class="toggle-row__desc">Thông báo khi có sản phẩm giảm giá hấp dẫn</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="notif-promo" />
+                            <span class="switch__track"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-row__info">
+                            <div class="toggle-row__title">Tin tức sức khoẻ</div>
+                            <div class="toggle-row__desc">Nhận bản tin sức khoẻ hàng tuần</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="notif-health" />
+                            <span class="switch__track"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card" style="margin-top:16px">
+                    <div class="settings-card__subtitle">🌐 Ngôn ngữ & Hiển thị</div>
+                    <div class="form-group">
+                        <label class="form-label">Ngôn ngữ</label>
+                        <select class="form-control form-select">
+                            <option value="vi" selected>🇻🇳 Tiếng Việt</option>
+                            <option value="en">🇬🇧 English</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions" style="margin-top:20px">
+                    <button class="btn btn-primary" onclick="saveNotifications()">Lưu cài đặt</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

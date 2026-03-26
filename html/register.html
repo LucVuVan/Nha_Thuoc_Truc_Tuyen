@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng ký – NhàThuốc+</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e8f5ee 0%, #d0ede0 50%, #e0f3e8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .auth-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-xl);
+      width: 100%;
+      max-width: 420px;
+    }
+    .auth-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .auth-logo__icon {
+      width: 60px;
+      height: 60px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 24px rgba(26,140,78,0.3);
+    }
+    .auth-logo__name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .auth-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .auth-form { display: flex; flex-direction: column; gap: 16px; }
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+    .auth-footer a { color: var(--primary); font-weight: 700; }
+    .auth-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="auth-logo__icon">🛡️</div>
+      <span class="auth-logo__name">NhàThuốc+</span>
+    </div>
+    <h1 class="auth-title">Đăng ký</h1>
+    <form class="auth-form" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label class="form-label">Họ và tên</label>
+        <input type="text" class="form-control" placeholder="Nguyễn Văn A" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="example@email.com" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Số điện thoại</label>
+        <input type="tel" class="form-control" placeholder="0912345678" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mật khẩu</label>
+        <div class="input-password-wrap">
+          <input type="password" class="form-control" placeholder="••••••••" />
+          <button type="button" class="toggle-password">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Xác nhận mật khẩu</label>
+        <div class="input-password-wrap">
+          <input type="password" class="form-control" placeholder="••••••••" />
+          <button type="button" class="toggle-password">👁</button>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg">Đăng ký</button>
+    </form>
+    <p class="auth-footer">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+  </div>
+  <script src="../js/main.js"></script>
+  <script>
+    function handleRegister(e) {
+      e.preventDefault();
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

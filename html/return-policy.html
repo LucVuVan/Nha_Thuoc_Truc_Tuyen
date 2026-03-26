@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chính sách đổi trả – NhàThuốc+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Be Vietnam Pro',sans-serif;background:#f5f9f6;color:#1a2e22}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        .site-header{background:#fff;border-bottom:1px solid #e8f5ee;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+        .site-header__inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .site-header__logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:1.1rem;font-weight:900;color:#065f46}
+        .site-header__nav{display:flex;align-items:center;gap:24px}
+        .site-header__nav a{font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;transition:color 0.2s}
+        .site-header__nav a:hover{color:#065f46}
+        .site-header__nav .btn-buy{background:#065f46;color:#fff;border-radius:10px;padding:8px 20px;font-weight:700}
+        .site-header__nav .btn-buy:hover{background:#047857;color:#fff}
+
+        /* HERO */
+        .page-hero{background:linear-gradient(125deg,#7c2d12 0%,#c2410c 40%,#f97316 70%,#fbbf24 100%);padding:60px 0 76px;position:relative;overflow:hidden}
+        .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(255,255,255,0.07) 0%,transparent 60%)}
+        .page-hero::after{content:'';position:absolute;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,0.05);right:-60px;top:-100px}
+        .page-hero__inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:40px}
+        .page-hero__tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:999px;padding:5px 16px;font-size:0.75rem;font-weight:700;color:#fff;margin-bottom:16px}
+        .page-hero__title{font-size:2.4rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:12px;text-shadow:0 2px 24px rgba(0,0,0,0.2)}
+        .page-hero__title span{color:#fed7aa}
+        .page-hero__desc{font-size:0.92rem;color:rgba(255,255,255,0.85);line-height:1.7;max-width:480px}
+        .page-hero__visual{font-size:7rem;flex-shrink:0;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3));animation:float 3.5s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+        .breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:#9ca3af;padding:16px 0}
+        .breadcrumb a{color:#065f46;text-decoration:none;font-weight:600}
+        .breadcrumb__sep{color:#d1d5db}
+
+        /* HIGHLIGHT CARDS */
+        .highlight-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 40px}
+        .hl-card{background:#fff;border-radius:18px;padding:24px 20px;text-align:center;border:1.5px solid #f0f0f0;transition:all 0.2s}
+        .hl-card:hover{border-color:#f97316;box-shadow:0 6px 20px rgba(249,115,22,0.1);transform:translateY(-2px)}
+        .hl-card__icon{font-size:2.2rem;margin-bottom:10px}
+        .hl-card__title{font-weight:800;font-size:0.95rem;color:#1a2e22;margin-bottom:4px}
+        .hl-card__desc{font-size:0.78rem;color:#9ca3af;line-height:1.4}
+        .hl-card__val{font-size:1.4rem;font-weight:900;color:#f97316;margin-bottom:4px}
+
+        /* LAYOUT */
+        .policy-layout{display:grid;grid-template-columns:220px 1fr;gap:28px;margin-bottom:64px}
+        .policy-nav{background:#fff;border-radius:18px;padding:20px;border:1.5px solid #f0f0f0;height:fit-content;position:sticky;top:80px}
+        .policy-nav__title{font-size:0.78rem;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+        .policy-nav__item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:0.82rem;font-weight:600;color:#6b7280;transition:all 0.2s;margin-bottom:2px;text-decoration:none}
+        .policy-nav__item:hover,.policy-nav__item.active{background:#fff7ed;color:#c2410c}
+
+        .policy-content{display:flex;flex-direction:column;gap:24px}
+        .policy-section{background:#fff;border-radius:18px;padding:32px;border:1.5px solid #f0f0f0}
+        .policy-section__title{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-weight:900;color:#1a2e22;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #f0fdf4}
+        .policy-section__icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:#ffedd5;flex-shrink:0}
+        .policy-section p{font-size:0.86rem;color:#4b5563;line-height:1.8;margin-bottom:14px}
+        .policy-section p:last-child{margin-bottom:0}
+
+        /* TABLE */
+        .policy-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.83rem}
+        .policy-table th{background:#f9fafb;padding:10px 14px;text-align:left;font-weight:800;color:#374151;border-bottom:2px solid #e5e7eb}
+        .policy-table td{padding:10px 14px;border-bottom:1px solid #f3f4f6;color:#4b5563;vertical-align:top}
+        .policy-table tr:hover td{background:#fafafa}
+        .badge-yes{background:#dcfce7;color:#065f46;border-radius:6px;padding:3px 10px;font-size:0.72rem;font-weight:700}
+        .badge-no{background:#fee2e2;color:#dc2626;border-radius:6px;padding:3px 10px;font-size:0.72rem;font-weight:700}
+
+        /* STEPS */
+        .steps{display:flex;flex-direction:column;gap:16px;margin:12px 0}
+        .step{display:flex;gap:16px;align-items:flex-start}
+        .step__num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f97316,#fb923c);color:#fff;font-weight:900;font-size:0.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .step__title{font-weight:800;font-size:0.87rem;color:#1a2e22;margin-bottom:3px}
+        .step__desc{font-size:0.8rem;color:#6b7280;line-height:1.5}
+
+        /* NOTE BOX */
+        .note-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:16px 18px;display:flex;gap:10px;font-size:0.82rem;color:#92400e;margin:12px 0}
+        .note-box__icon{font-size:1.1rem;flex-shrink:0}
+
+        /* FOOTER */
+        .footer{background:#1a2e22}
+        .footer__main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding:48px 0 32px}
+        .footer__brand-name{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px}
+        .footer__brand-desc{font-size:0.82rem;color:#9ca3af;line-height:1.6}
+        .footer__col-title{font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:0.5px;text-transform:uppercase}
+        .footer__links{display:flex;flex-direction:column;gap:8px}
+        .footer__link{font-size:0.82rem;color:#9ca3af;text-decoration:none;transition:color 0.2s}
+        .footer__link:hover{color:#6ee7b7}
+        .footer__contact-item{font-size:0.82rem;color:#9ca3af;margin-bottom:6px}
+        .footer__contact-item span{color:#d1fae5;font-weight:600}
+        .footer__bottom{border-top:1px solid #2d4a38;padding:16px 0;text-align:center;font-size:0.78rem;color:#6b7280}
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header style="background:#fff;border-bottom:1px solid #e8f5ee;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+        <a href="index.html" style="text-decoration:none;font-size:1.1rem;font-weight:900;color:#065f46;font-family:'Be Vietnam Pro',sans-serif;">🛡️ NhàThuốc+</a>
+        <nav style="display:flex;align-items:center;gap:20px;">
+            <a href="index.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Trang chủ</a>
+            <a href="about.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Về chúng tôi</a>
+            <a href="contact.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Liên hệ</a>
+            <a href="faq.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">FAQ</a>
+            <a href="return-policy.html" style="font-size:0.85rem;font-weight:700;color:#065f46;text-decoration:none;border-bottom:2px solid #065f46;padding-bottom:2px;">Đổi trả</a>
+            <a href="terms.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Điều khoản</a>
+            <a href="index.html" style="background:#065f46;color:#fff;border-radius:10px;padding:8px 20px;font-size:0.85rem;font-weight:700;text-decoration:none;">Mua ngay</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero__inner">
+                <div>
+                    <div class="page-hero__tag">🔄 Chính sách bảo vệ khách hàng</div>
+                    <h1 class="page-hero__title">Chính sách<br/><span>đổi trả hàng</span></h1>
+                    <p class="page-hero__desc">Chúng tôi cam kết bảo vệ quyền lợi của bạn. Đổi trả dễ dàng, hoàn tiền nhanh chóng — không cần lý do phức tạp.</p>
+                </div>
+                <div class="page-hero__visual">🔄</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">🏠 Trang chủ</a>
+            <span class="breadcrumb__sep">›</span>
+            <span>Chính sách đổi trả</span>
+        </div>
+
+        <!-- HIGHLIGHT -->
+        <div class="highlight-cards">
+            <div class="hl-card">
+                <div class="hl-card__icon">📅</div>
+                <div class="hl-card__val">7 ngày</div>
+                <div class="hl-card__title">Thời gian đổi trả</div>
+                <div class="hl-card__desc">Kể từ ngày nhận hàng</div>
+            </div>
+            <div class="hl-card">
+                <div class="hl-card__icon">💰</div>
+                <div class="hl-card__val">100%</div>
+                <div class="hl-card__title">Hoàn tiền đầy đủ</div>
+                <div class="hl-card__desc">Nếu lỗi do NhàThuốc+</div>
+            </div>
+            <div class="hl-card">
+                <div class="hl-card__icon">⚡</div>
+                <div class="hl-card__val">3–5 ngày</div>
+                <div class="hl-card__title">Thời gian hoàn tiền</div>
+                <div class="hl-card__desc">Sau khi xác nhận</div>
+            </div>
+        </div>
+
+        <div class="policy-layout">
+            <!-- NAV -->
+            <aside class="policy-nav">
+                <div class="policy-nav__title">Nội dung</div>
+                <a href="#s1" class="policy-nav__item active">📋 Điều kiện đổi trả</a>
+                <a href="#s2" class="policy-nav__item">✅ Sản phẩm được đổi</a>
+                <a href="#s3" class="policy-nav__item">❌ Không áp dụng</a>
+                <a href="#s4" class="policy-nav__item">📦 Quy trình đổi trả</a>
+                <a href="#s5" class="policy-nav__item">💰 Hoàn tiền</a>
+                <a href="#s6" class="policy-nav__item">📞 Liên hệ hỗ trợ</a>
+            </aside>
+
+            <!-- CONTENT -->
+            <div class="policy-content">
+
+                <div class="policy-section" id="s1">
+                    <div class="policy-section__title"><div class="policy-section__icon">📋</div>Điều kiện đổi trả</div>
+                    <p>NhàThuốc+ chấp nhận đổi trả trong vòng <strong>7 ngày</strong> kể từ ngày nhận hàng với các điều kiện sau:</p>
+                    <div class="steps">
+                        <div class="step"><div class="step__num">1</div><div><div class="step__title">Sản phẩm còn nguyên vẹn</div><div class="step__desc">Chưa qua sử dụng, còn nguyên tem niêm phong, bao bì chưa bóc.</div></div></div>
+                        <div class="step"><div class="step__num">2</div><div><div class="step__title">Còn hóa đơn mua hàng</div><div class="step__desc">Xuất trình hóa đơn điện tử hoặc mã đơn hàng khi yêu cầu đổi trả.</div></div></div>
+                        <div class="step"><div class="step__num">3</div><div><div class="step__title">Còn trong thời hạn đổi trả</div><div class="step__desc">Trong vòng 7 ngày kể từ ngày ký nhận hàng từ shipper.</div></div></div>
+                        <div class="step"><div class="step__num">4</div><div><div class="step__title">Sản phẩm còn hạn sử dụng</div><div class="step__desc">Không áp dụng với sản phẩm đã hết hạn sử dụng tại thời điểm đổi trả.</div></div></div>
+                    </div>
+                </div>
+
+                <div class="policy-section" id="s2">
+                    <div class="policy-section__title"><div class="policy-section__icon">✅</div>Trường hợp được đổi trả & hoàn tiền 100%</div>
+                    <table class="policy-table">
+                        <tr><th>Lý do</th><th>Hình thức xử lý</th><th>Ai chịu phí ship</th></tr>
+                        <tr><td>Sản phẩm bị lỗi, hỏng khi nhận</td><td><span class="badge-yes">Hoàn tiền 100%</span></td><td>NhàThuốc+</td></tr>
+                        <tr><td>Giao sai sản phẩm</td><td><span class="badge-yes">Đổi + Hoàn tiền</span></td><td>NhàThuốc+</td></tr>
+                        <tr><td>Sản phẩm không đúng mô tả</td><td><span class="badge-yes">Hoàn tiền 100%</span></td><td>NhàThuốc+</td></tr>
+                        <tr><td>Sản phẩm thiếu phụ kiện/quà tặng</td><td><span class="badge-yes">Bổ sung hoặc hoàn tiền</span></td><td>NhàThuốc+</td></tr>
+                        <tr><td>Khách đặt nhầm (còn nguyên vẹn)</td><td><span class="badge-yes">Đổi sản phẩm khác</span></td><td>Khách hàng</td></tr>
+                    </table>
+                </div>
+
+                <div class="policy-section" id="s3">
+                    <div class="policy-section__title"><div class="policy-section__icon" style="background:#fee2e2">❌</div>Trường hợp KHÔNG áp dụng đổi trả</div>
+                    <p>Chúng tôi không thể xử lý đổi trả trong các trường hợp sau:</p>
+                    <div class="note-box"><div class="note-box__icon">⚠️</div><div><strong>Lưu ý:</strong> Vui lòng kiểm tra kỹ sản phẩm ngay khi nhận hàng. Khiếu nại về ngoại quan cần được gửi trong 24 giờ sau khi nhận.</div></div>
+                    <table class="policy-table">
+                        <tr><th>Trường hợp</th><th>Trạng thái</th></tr>
+                        <tr><td>Thuốc đã mở bao bì, đã dùng</td><td><span class="badge-no">Không áp dụng</span></td></tr>
+                        <tr><td>Quá 7 ngày kể từ ngày nhận hàng</td><td><span class="badge-no">Không áp dụng</span></td></tr>
+                        <tr><td>Không có hóa đơn, mã đơn hàng</td><td><span class="badge-no">Không áp dụng</span></td></tr>
+                        <tr><td>Sản phẩm hết hạn sử dụng</td><td><span class="badge-no">Không áp dụng</span></td></tr>
+                        <tr><td>Thiết bị y tế đã qua sử dụng</td><td><span class="badge-no">Không áp dụng</span></td></tr>
+                        <tr><td>Sản phẩm có ghi "Miễn đổi trả"</td><td><span class="badge-no">Không áp dụng</span></td></tr>
+                    </table>
+                </div>
+
+                <div class="policy-section" id="s4">
+                    <div class="policy-section__title"><div class="policy-section__icon" style="background:#dbeafe">📦</div>Quy trình đổi trả</div>
+                    <div class="steps">
+                        <div class="step"><div class="step__num">1</div><div><div class="step__title">Liên hệ yêu cầu đổi trả</div><div class="step__desc">Gọi hotline 1900 xxxx hoặc chat trực tuyến, cung cấp mã đơn hàng và lý do đổi trả. Chụp ảnh sản phẩm nếu bị lỗi.</div></div></div>
+                        <div class="step"><div class="step__num">2</div><div><div class="step__title">Xác nhận từ NhàThuốc+</div><div class="step__desc">Chúng tôi xét duyệt trong 2–4 giờ làm việc và gửi xác nhận qua email/SMS.</div></div></div>
+                        <div class="step"><div class="step__num">3</div><div><div class="step__title">Gửi trả sản phẩm</div><div class="step__desc">Đóng gói cẩn thận và gửi về địa chỉ kho của chúng tôi (shipper sẽ đến lấy nếu lỗi từ NhàThuốc+).</div></div></div>
+                        <div class="step"><div class="step__num">4</div><div><div class="step__title">Kiểm tra & xử lý</div><div class="step__desc">Sau khi nhận hàng, chúng tôi kiểm tra trong 1–2 ngày làm việc và tiến hành đổi hàng hoặc hoàn tiền.</div></div></div>
+                    </div>
+                </div>
+
+                <div class="policy-section" id="s5">
+                    <div class="policy-section__title"><div class="policy-section__icon" style="background:#dcfce7">💰</div>Chính sách hoàn tiền</div>
+                    <p>Tiền hoàn lại sẽ được chuyển về phương thức thanh toán ban đầu:</p>
+                    <table class="policy-table">
+                        <tr><th>Phương thức thanh toán</th><th>Thời gian hoàn tiền</th></tr>
+                        <tr><td>Ví điện tử (MoMo, ZaloPay)</td><td>1–2 ngày làm việc</td></tr>
+                        <tr><td>Chuyển khoản ngân hàng</td><td>3–5 ngày làm việc</td></tr>
+                        <tr><td>Thẻ tín dụng/ghi nợ</td><td>5–7 ngày làm việc</td></tr>
+                        <tr><td>Thanh toán khi nhận hàng (COD)</td><td>3–5 ngày (chuyển khoản)</td></tr>
+                    </table>
+                    <div class="note-box" style="margin-top:16px"><div class="note-box__icon">💡</div><div>Thời gian thực tế có thể thay đổi tùy ngân hàng. Nếu quá thời hạn mà chưa nhận được tiền, hãy liên hệ hotline để được hỗ trợ.</div></div>
+                </div>
+
+                <div class="policy-section" id="s6">
+                    <div class="policy-section__title"><div class="policy-section__icon" style="background:#ede9fe">📞</div>Liên hệ hỗ trợ đổi trả</div>
+                    <p>Đội ngũ chăm sóc khách hàng của chúng tôi luôn sẵn sàng hỗ trợ bạn:</p>
+                    <div class="steps">
+                        <div class="step"><div class="step__num">📞</div><div><div class="step__title">Hotline: 1900 xxxx</div><div class="step__desc">Miễn phí · Hoạt động 24/7 · Phản hồi ngay lập tức</div></div></div>
+                        <div class="step"><div class="step__num">📧</div><div><div class="step__title">Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90e3e5e0e0ffe2e4d0fef8f1e4f8e5fff3bee6fe">[email&#160;protected]</a></div><div class="step__desc">Phản hồi trong 2 giờ làm việc</div></div></div>
+                        <div class="step"><div class="step__num">💬</div><div><div class="step__title">Live Chat trên website</div><div class="step__desc">Chat trực tiếp với nhân viên hỗ trợ 24/7</div></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer style="background:#1a2e22;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding:48px 0 32px;">
+            <div>
+                <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">🛡️ NhàThuốc+</div>
+                <p style="font-size:0.82rem;color:#9ca3af;line-height:1.6;">Hệ thống nhà thuốc trực tuyến uy tín — giao thuốc tận nhà trong 2 giờ.</p>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Thông tin</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="about.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Về chúng tôi</a>
+                    <a href="contact.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Liên hệ</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Hỗ trợ</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="faq.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Câu hỏi thường gặp</a>
+                    <a href="return-policy.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Chính sách đổi trả</a>
+                    <a href="terms.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Điều khoản sử dụng</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Liên hệ</div>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Hotline: <span style="color:#d1fae5;font-weight:600;">1900 xxxx</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Email: <span style="color:#d1fae5;font-weight:600;">support@nhathuoc.vn</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;">Giờ làm việc: <span style="color:#d1fae5;font-weight:600;">24/7</span></p>
+            </div>
+        </div>
+        <div style="border-top:1px solid #2d4a38;padding:16px 0;text-align:center;font-size:0.78rem;color:#6b7280;">© 2026 NhàThuốc+. Tất cả quyền được bảo lưu.</div>
+    </div>
+</footer>
+</body>
+</html>

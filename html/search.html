@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tìm kiếm – NhàThuốc+</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/search.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header__inner">
+        <a href="index.html" class="header__logo">
+            <span class="header__logo-text">🛡️ NhàThuốc+</span>
+        </a>
+        <div class="header__search">
+            <form class="search-form">
+                <div class="search-bar">
+                    <span class="search-bar__icon">🔍</span>
+                    <input type="text" placeholder="Tìm thuốc, hoạt chất, triệu chứng…" />
+                </div>
+            </form>
+        </div>
+        <div class="header__actions">
+            <div id="header-guest">
+                <a href="login.html" class="btn btn-primary btn-sm">Đăng nhập</a>
+            </div>
+            <div id="header-user" class="header-user" style="display:none">
+                <a href="orders.html" class="header__icon-btn" title="Đơn hàng">📋</a>
+                <a href="cart.html" class="header__icon-btn" title="Giỏ hàng">
+                    🛒<span class="header__cart-badge" id="cart-badge">0</span>
+                </a>
+                <div class="header-avatar-wrap">
+                    <button class="header-avatar" id="avatar-btn" onclick="toggleUserMenu()">
+                        <span id="avatar-letter">U</span>
+                    </button>
+                    <div class="header-user-menu" id="user-menu">
+                        <div class="user-menu__info">
+                            <div class="user-menu__name" id="menu-name">Người dùng</div>
+                            <div class="user-menu__email" id="menu-email"></div>
+                        </div>
+                        <div class="user-menu__divider"></div>
+                        <a href="orders.html" class="user-menu__item">📦 Đơn hàng của tôi</a>
+                        <div class="user-menu__divider"></div>
+                        <button class="user-menu__item user-menu__logout" onclick="logout()">🚪 Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container section">
+        <div class="search-layout">
+
+            <!-- Sidebar Filter -->
+            <aside class="sidebar">
+                <div class="filter-box">
+                    <div class="filter-box__title">🔽 Bộ lọc</div>
+
+                    <div class="filter-section">
+                        <div class="filter-section__label">Danh mục</div>
+                        <div class="filter-options" id="filter-categories">
+                            <!-- render by JS -->
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-section__label">Khoảng giá</div>
+                        <input type="range" class="price-range" id="price-range" min="0" max="500000" value="500000" />
+                        <div class="price-range-display">
+                            <span>0đ</span>
+                            <span id="price-max-label">500.000đ</span>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-section__label">Thương hiệu</div>
+                        <div class="filter-options" id="filter-brands">
+                            <!-- render by JS -->
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="toggle-wrap">
+                            <span class="toggle-label">Chỉ hiển thị còn hàng</span>
+                            <div class="toggle" id="toggle-instock"></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Results -->
+            <div class="search-results">
+                <div class="results-header">
+                    <div>
+                        <div class="results-title" id="results-title">Kết quả tìm kiếm</div>
+                        <div class="results-count" id="results-count"></div>
+                    </div>
+                    <div class="results-actions">
+                        <select class="sort-select" id="sort-select">
+                            <option value="popular">Phổ biến nhất</option>
+                            <option value="price-asc">Giá thấp → cao</option>
+                            <option value="price-desc">Giá cao → thấp</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="results-grid" id="results-grid">
+                    <!-- render by JS -->
+                </div>
+
+                <div class="pagination" id="pagination" style="margin-top:32px"></div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer__main">
+        <div>
+            <div class="footer__brand-name">🛡️ NhàThuốc+</div>
+            <p class="footer__brand-desc">Hệ thống nhà thuốc trực tuyến uy tín, chuyên nghiệp</p>
+        </div>
+        <div>
+            <div class="footer__col-title">Thông tin</div>
+            <div class="footer__links">
+                <a href="#" class="footer__link">Về chúng tôi</a>
+                <a href="#" class="footer__link">Liên hệ</a>
+            </div>
+        </div>
+        <div>
+            <div class="footer__col-title">Hỗ trợ</div>
+            <div class="footer__links">
+                <a href="#" class="footer__link">Câu hỏi thường gặp</a>
+                <a href="#" class="footer__link">Chính sách đổi trả</a>
+            </div>
+        </div>
+        <div>
+            <div class="footer__col-title">Liên hệ</div>
+            <p class="footer__contact-item">Hotline: <span>1900 xxxx</span></p>
+        </div>
+    </div>
+    <div class="footer__bottom">© 2026 NhàThuốc+. Tất cả quyền được bảo lưu.</div>
+</footer>
+
+
+<script src="../js/main.js"></script>
+<script src="../js/products-data.js"></script>  <!-- ← thêm dòng này -->
+<script src="../js/search.js"></script>
+</body>
+</html>

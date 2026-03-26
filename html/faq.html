@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Câu hỏi thường gặp – NhàThuốc+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Be Vietnam Pro',sans-serif;background:#f5f9f6;color:#1a2e22}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        .site-header{background:#fff;border-bottom:1px solid #e8f5ee;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+        .site-header__inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .site-header__logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-size:1.1rem;font-weight:900;color:#065f46}
+        .site-header__nav{display:flex;align-items:center;gap:24px}
+        .site-header__nav a{font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;transition:color 0.2s}
+        .site-header__nav a:hover{color:#065f46}
+        .site-header__nav a.active{color:#065f46;border-bottom:2px solid #065f46;padding-bottom:2px}
+        .site-header__nav .btn-buy{background:#065f46;color:#fff;border-radius:10px;padding:8px 20px;font-weight:700}
+        .site-header__nav .btn-buy:hover{background:#047857;color:#fff}
+
+        /* HERO */
+        .page-hero{background:linear-gradient(125deg,#064e3b 0%,#065f46 40%,#0d9488 75%,#06b6d4 100%);padding:60px 0 76px;position:relative;overflow:hidden}
+        .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(255,255,255,0.07) 0%,transparent 60%)}
+        .page-hero::after{content:'';position:absolute;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,0.05);right:-60px;top:-100px}
+        .page-hero__inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:40px}
+        .page-hero__tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:999px;padding:5px 16px;font-size:0.75rem;font-weight:700;color:#fff;margin-bottom:16px}
+        .page-hero__title{font-size:2.4rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:12px;text-shadow:0 2px 24px rgba(0,0,0,0.2)}
+        .page-hero__title span{color:#6ee7b7}
+        .page-hero__desc{font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;max-width:480px}
+        .page-hero__visual{font-size:7rem;flex-shrink:0;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3));animation:float 3.5s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+        .breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:#9ca3af;padding:16px 0}
+        .breadcrumb a{color:#065f46;text-decoration:none;font-weight:600}
+        .breadcrumb__sep{color:#d1d5db}
+
+        /* SEARCH */
+        .faq-search-wrap{margin:8px 0 40px;position:relative}
+        .faq-search{width:100%;padding:16px 20px 16px 52px;border:2px solid #e5e7eb;border-radius:16px;font-size:0.95rem;font-family:inherit;background:#fff;outline:none;transition:all 0.2s}
+        .faq-search:focus{border-color:#065f46;box-shadow:0 0 0 3px rgba(6,95,70,0.1)}
+        .faq-search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:1.1rem}
+
+        /* CATEGORIES */
+        .faq-cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+        .faq-cat{padding:8px 18px;border-radius:999px;border:1.5px solid #e5e7eb;background:#fff;font-size:0.8rem;font-weight:700;color:#6b7280;cursor:pointer;transition:all 0.2s;font-family:inherit}
+        .faq-cat:hover,.faq-cat.active{background:#065f46;color:#fff;border-color:#065f46}
+
+        /* FAQ LAYOUT */
+        .faq-layout{display:grid;grid-template-columns:240px 1fr;gap:28px;margin-bottom:64px}
+
+        /* SIDEBAR NAV */
+        .faq-nav{background:#fff;border-radius:18px;padding:20px;border:1.5px solid #f0f0f0;height:fit-content;position:sticky;top:80px}
+        .faq-nav__title{font-size:0.78rem;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+        .faq-nav__item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:0.83rem;font-weight:600;color:#6b7280;transition:all 0.2s;margin-bottom:2px}
+        .faq-nav__item:hover,.faq-nav__item.active{background:#f0fdf4;color:#065f46}
+        .faq-nav__item .dot{width:6px;height:6px;border-radius:50%;background:#d1d5db;flex-shrink:0}
+        .faq-nav__item.active .dot{background:#065f46}
+
+        /* FAQ GROUPS */
+        .faq-group{margin-bottom:36px}
+        .faq-group__title{display:flex;align-items:center;gap:10px;font-size:1rem;font-weight:900;color:#1a2e22;margin-bottom:16px}
+        .faq-group__icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:#dcfce7;flex-shrink:0}
+        .faq-list{display:flex;flex-direction:column;gap:10px}
+        .faq-item{background:#fff;border-radius:14px;border:1.5px solid #f0f0f0;overflow:hidden;transition:border-color 0.2s}
+        .faq-item.open{border-color:#065f46}
+        .faq-item__q{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;font-weight:700;font-size:0.87rem;color:#1a2e22;gap:12px;user-select:none}
+        .faq-item__q:hover{background:#fafafa}
+        .faq-item__icon{width:24px;height:24px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;transition:all 0.3s}
+        .faq-item.open .faq-item__icon{background:#065f46;color:#fff;transform:rotate(45deg)}
+        .faq-item__a{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.25s ease;font-size:0.83rem;color:#6b7280;line-height:1.7;padding:0 20px}
+        .faq-item.open .faq-item__a{max-height:300px;padding:0 20px 16px}
+
+        /* CTA */
+        .faq-cta{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:20px;padding:40px;text-align:center;border:1.5px solid #bbf7d0;margin-bottom:64px}
+        .faq-cta__title{font-size:1.4rem;font-weight:900;color:#1a2e22;margin-bottom:8px}
+        .faq-cta__desc{font-size:0.88rem;color:#6b7280;margin-bottom:20px}
+        .faq-cta__btns{display:flex;gap:12px;justify-content:center}
+        .btn-g{background:#065f46;color:#fff;border-radius:10px;padding:11px 24px;font-size:0.85rem;font-weight:800;text-decoration:none;border:none;cursor:pointer;font-family:inherit;transition:all 0.2s}
+        .btn-g:hover{background:#047857;transform:translateY(-1px)}
+        .btn-w{background:#fff;color:#065f46;border:2px solid #065f46;border-radius:10px;padding:10px 24px;font-size:0.85rem;font-weight:800;text-decoration:none;cursor:pointer;font-family:inherit;transition:all 0.2s}
+        .btn-w:hover{background:#f0fdf4;transform:translateY(-1px)}
+
+        /* FOOTER */
+        .footer{background:#1a2e22}
+        .footer__main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding:48px 0 32px}
+        .footer__brand-name{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px}
+        .footer__brand-desc{font-size:0.82rem;color:#9ca3af;line-height:1.6}
+        .footer__col-title{font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:0.5px;text-transform:uppercase}
+        .footer__links{display:flex;flex-direction:column;gap:8px}
+        .footer__link{font-size:0.82rem;color:#9ca3af;text-decoration:none;transition:color 0.2s}
+        .footer__link:hover{color:#6ee7b7}
+        .footer__contact-item{font-size:0.82rem;color:#9ca3af;margin-bottom:6px}
+        .footer__contact-item span{color:#d1fae5;font-weight:600}
+        .footer__bottom{border-top:1px solid #2d4a38;padding:16px 0;text-align:center;font-size:0.78rem;color:#6b7280}
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header style="background:#fff;border-bottom:1px solid #e8f5ee;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+        <a href="index.html" style="text-decoration:none;font-size:1.1rem;font-weight:900;color:#065f46;font-family:'Be Vietnam Pro',sans-serif;">🛡️ NhàThuốc+</a>
+        <nav style="display:flex;align-items:center;gap:20px;">
+            <a href="index.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Trang chủ</a>
+            <a href="about.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Về chúng tôi</a>
+            <a href="contact.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Liên hệ</a>
+            <a href="faq.html" style="font-size:0.85rem;font-weight:700;color:#065f46;text-decoration:none;border-bottom:2px solid #065f46;padding-bottom:2px;">FAQ</a>
+            <a href="return-policy.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Đổi trả</a>
+            <a href="terms.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Điều khoản</a>
+            <a href="index.html" style="background:#065f46;color:#fff;border-radius:10px;padding:8px 20px;font-size:0.85rem;font-weight:700;text-decoration:none;">Mua ngay</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero__inner">
+                <div>
+                    <div class="page-hero__tag">❓ Hỗ trợ khách hàng</div>
+                    <h1 class="page-hero__title">Câu hỏi<br/><span>thường gặp</span></h1>
+                    <p class="page-hero__desc">Tìm câu trả lời nhanh cho những thắc mắc phổ biến nhất về sản phẩm, đơn hàng và dịch vụ của NhàThuốc+.</p>
+                </div>
+                <div class="page-hero__visual">❓</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">🏠 Trang chủ</a>
+            <span class="breadcrumb__sep">›</span>
+            <span>Câu hỏi thường gặp</span>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="faq-search-wrap">
+            <span class="faq-search-icon">🔍</span>
+            <input type="text" class="faq-search" placeholder="Tìm kiếm câu hỏi…" oninput="filterFaq(this.value)" />
+        </div>
+
+        <div class="faq-layout">
+            <!-- SIDEBAR NAV -->
+            <aside class="faq-nav">
+                <div class="faq-nav__title">Danh mục</div>
+                <div class="faq-nav__item active" onclick="scrollToGroup('g1',this)"><span class="dot"></span>Đặt hàng & Thanh toán</div>
+                <div class="faq-nav__item" onclick="scrollToGroup('g2',this)"><span class="dot"></span>Giao hàng</div>
+                <div class="faq-nav__item" onclick="scrollToGroup('g3',this)"><span class="dot"></span>Sản phẩm & Thuốc</div>
+                <div class="faq-nav__item" onclick="scrollToGroup('g4',this)"><span class="dot"></span>Đổi trả & Hoàn tiền</div>
+                <div class="faq-nav__item" onclick="scrollToGroup('g5',this)"><span class="dot"></span>Tài khoản</div>
+            </aside>
+
+            <!-- FAQ CONTENT -->
+            <div>
+                <!-- Group 1 -->
+                <div class="faq-group" id="g1">
+                    <div class="faq-group__title"><div class="faq-group__icon">🛒</div>Đặt hàng & Thanh toán</div>
+                    <div class="faq-list">
+                        <div class="faq-item open">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Tôi có thể đặt hàng bằng cách nào?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Bạn có thể đặt hàng trực tiếp trên website NhàThuốc+, chọn sản phẩm, thêm vào giỏ và thanh toán online. Hoặc gọi hotline 1900 xxxx để đặt hàng qua điện thoại.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>NhàThuốc+ hỗ trợ những phương thức thanh toán nào?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Chúng tôi chấp nhận: Thanh toán khi nhận hàng (COD), Chuyển khoản ngân hàng, Ví điện tử MoMo/ZaloPay/VNPay, và thẻ tín dụng/ghi nợ Visa/Mastercard.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Đơn hàng tối thiểu là bao nhiêu?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Không có giá trị đơn hàng tối thiểu. Tuy nhiên đơn từ 150.000đ sẽ được miễn phí giao hàng trong nội thành Hà Nội.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Tôi có thể hủy đơn hàng sau khi đặt không?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Bạn có thể hủy đơn trong vòng 30 phút kể từ khi đặt hàng qua mục "Đơn hàng của tôi" hoặc gọi hotline. Sau khi shipper lấy hàng, đơn không thể hủy online nhưng bạn vẫn có thể từ chối nhận hàng.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="faq-group" id="g2">
+                    <div class="faq-group__title"><div class="faq-group__icon" style="background:#dbeafe">🚚</div>Giao hàng</div>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Thời gian giao hàng là bao lâu?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Nội thành Hà Nội: giao trong 2 giờ kể từ khi xác nhận đơn. Ngoại thành và các tỉnh khác: 1–3 ngày làm việc tùy khoảng cách.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Phí giao hàng được tính như thế nào?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Miễn phí với đơn từ 150.000đ trong nội thành Hà Nội. Đơn dưới 150.000đ: 15.000đ. Ngoại thành: 25.000–45.000đ tùy khu vực. Tỉnh thành khác: theo biểu phí vận chuyển.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>NhàThuốc+ có giao hàng vào ban đêm không?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Có! Chúng tôi giao hàng 24/7 trong nội thành Hà Nội — kể cả 2 giờ sáng khi bạn cần thuốc gấp.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Tôi theo dõi đơn hàng bằng cách nào?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Đăng nhập tài khoản và vào mục "Đơn hàng của tôi" để xem trạng thái real-time. Bạn cũng nhận được SMS và email thông báo khi đơn hàng được cập nhật.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="faq-group" id="g3">
+                    <div class="faq-group__title"><div class="faq-group__icon" style="background:#ffedd5">💊</div>Sản phẩm & Thuốc</div>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Làm sao biết thuốc là hàng chính hãng?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">100% sản phẩm được nhập từ nhà sản xuất hoặc nhà phân phối ủy quyền, có đầy đủ hóa đơn chứng từ. Mỗi sản phẩm có tem chống hàng giả và số lô để tra cứu nguồn gốc.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Dược sĩ có thể tư vấn thuốc theo đơn của bác sĩ không?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Có! Bạn có thể chat với dược sĩ hoặc gửi hình ảnh đơn thuốc. Dược sĩ sẽ kiểm tra và tư vấn các sản phẩm phù hợp, liều dùng và lưu ý khi dùng thuốc.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Thuốc kê đơn có mua online được không?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Hiện tại NhàThuốc+ chỉ bán thuốc không kê đơn (OTC). Thuốc kê đơn cần có đơn bác sĩ hợp lệ và bạn nên mua tại nhà thuốc có dược sĩ trực tiếp thẩm định.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 4 -->
+                <div class="faq-group" id="g4">
+                    <div class="faq-group__title"><div class="faq-group__icon" style="background:#fce7f3">🔄</div>Đổi trả & Hoàn tiền</div>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Chính sách đổi trả như thế nào?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Đổi trả trong 7 ngày nếu sản phẩm còn nguyên vẹn, chưa sử dụng, còn hạn sử dụng và có hóa đơn. Hoàn tiền 100% nếu sản phẩm lỗi hoặc không đúng mô tả.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Thời gian hoàn tiền mất bao lâu?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Sau khi xác nhận trả hàng thành công, tiền sẽ được hoàn lại trong 3–5 ngày làm việc vào tài khoản ngân hàng hoặc ví điện tử của bạn.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Sản phẩm nào không được đổi trả?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Không áp dụng đổi trả với: thuốc đã mở bao bì, sản phẩm đã sử dụng quá 30%, thiết bị y tế đã qua sử dụng và các sản phẩm có ghi "không đổi trả" trên mô tả.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 5 -->
+                <div class="faq-group" id="g5">
+                    <div class="faq-group__title"><div class="faq-group__icon" style="background:#ede9fe">👤</div>Tài khoản</div>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Tôi có cần tạo tài khoản để mua hàng không?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Không bắt buộc. Bạn có thể mua hàng với tư cách khách. Tuy nhiên tạo tài khoản giúp bạn theo dõi đơn hàng, lưu lịch sử mua hàng và nhận ưu đãi thành viên.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item__q" onclick="toggleFaq(this)"><span>Làm sao nếu tôi quên mật khẩu?</span><div class="faq-item__icon">+</div></div>
+                            <div class="faq-item__a">Nhấn "Quên mật khẩu" ở trang đăng nhập, nhập email đã đăng ký — chúng tôi sẽ gửi link đặt lại mật khẩu trong vài phút.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="faq-cta">
+            <div style="font-size:2.5rem;margin-bottom:12px">🤝</div>
+            <div class="faq-cta__title">Không tìm thấy câu trả lời?</div>
+            <div class="faq-cta__desc">Đội ngũ dược sĩ và hỗ trợ khách hàng luôn sẵn sàng giải đáp cho bạn.</div>
+            <div class="faq-cta__btns">
+                <a href="contact.html" class="btn-g">📩 Gửi câu hỏi</a>
+                <a href="tel:1900xxxx" class="btn-w">📞 Gọi hotline</a>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function toggleFaq(el) {
+        const item = el.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    }
+    function scrollToGroup(id, navEl) {
+        document.querySelectorAll('.faq-nav__item').forEach(i => i.classList.remove('active'));
+        navEl.classList.add('active');
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function filterFaq(q) {
+        const kw = q.toLowerCase();
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const text = item.querySelector('.faq-item__q span').textContent.toLowerCase()
+                       + item.querySelector('.faq-item__a').textContent.toLowerCase();
+            item.style.display = text.includes(kw) ? '' : 'none';
+        });
+    }
+</script>
+<footer style="background:#1a2e22;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding:48px 0 32px;">
+            <div>
+                <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">🛡️ NhàThuốc+</div>
+                <p style="font-size:0.82rem;color:#9ca3af;line-height:1.6;">Hệ thống nhà thuốc trực tuyến uy tín — giao thuốc tận nhà trong 2 giờ.</p>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Thông tin</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="about.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Về chúng tôi</a>
+                    <a href="contact.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Liên hệ</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Hỗ trợ</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="faq.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Câu hỏi thường gặp</a>
+                    <a href="return-policy.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Chính sách đổi trả</a>
+                    <a href="terms.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Điều khoản sử dụng</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Liên hệ</div>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Hotline: <span style="color:#d1fae5;font-weight:600;">1900 xxxx</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Email: <span style="color:#d1fae5;font-weight:600;">support@nhathuoc.vn</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;">Giờ làm việc: <span style="color:#d1fae5;font-weight:600;">24/7</span></p>
+            </div>
+        </div>
+        <div style="border-top:1px solid #2d4a38;padding:16px 0;text-align:center;font-size:0.78rem;color:#6b7280;">© 2026 NhàThuốc+. Tất cả quyền được bảo lưu.</div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ hàng – NhàThuốc+</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/cart.css" />
+</head>
+<body>
+
+<!-- HEADER CHECKOUT -->
+<header class="header-checkout">
+    <div class="header-checkout__inner">
+        <a href="index.html" style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--primary)">
+            🛡️ NhàThuốc+
+        </a>
+        <nav class="header-checkout__nav">
+            <span class="header-checkout__link active">Giỏ hàng</span>
+            <span class="header-checkout__link">Thanh toán</span>
+        </nav>
+        <a href="cart.html" class="header__icon-btn" style="margin-left:auto">
+            🛒<span class="header__cart-badge" id="cart-badge-header">0</span>
+        </a>
+    </div>
+</header>
+
+<main>
+    <div class="container section">
+        <h1 class="cart-page-title">Giỏ hàng của bạn</h1>
+
+        <!-- Empty state -->
+        <div id="cart-empty" class="empty-cart" style="display:none">
+            <div class="empty-cart__icon">🛒</div>
+            <div class="empty-cart__title">Giỏ hàng trống</div>
+            <div class="empty-cart__desc">Bạn chưa thêm sản phẩm nào vào giỏ hàng</div>
+            <a href="index.html" class="btn btn-primary btn-lg">Tiếp tục mua sắm</a>
+        </div>
+
+        <!-- Cart layout -->
+        <div class="cart-layout" id="cart-layout" style="display:none">
+
+            <!-- Cart items -->
+            <div>
+                <div class="cart-items">
+                    <div id="cart-items-wrapper">
+                        <!-- render by cart.js -->
+                    </div>
+                    <div class="cart-footer">
+                        <button class="cart-clear" onclick="clearCart()">Xóa tất cả</button>
+                        <a href="index.html" class="cart-continue">← Tiếp tục mua sắm</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <div class="order-summary__title">Tóm tắt đơn hàng</div>
+                <div class="order-summary__row">
+                    <span>Tạm tính</span>
+                    <span style="font-weight:600" id="summary-subtotal">0đ</span>
+                </div>
+                <div class="order-summary__row">
+                    <span>Phí giao hàng</span>
+                    <span style="font-weight:600" id="summary-shipping">25.000đ</span>
+                </div>
+                <div class="order-summary__row total">
+                    <span>Tổng cộng</span>
+                    <span id="summary-total">0đ</span>
+                </div>
+                <a href="checkout.html" class="btn btn-primary btn-full btn-lg" style="margin-top:16px">
+                    Tiến hành thanh toán
+                </a>
+                <div class="order-summary__features">
+                    <div class="order-summary__feature"><span class="icon">✓</span> Giao hàng trong 2 giờ</div>
+                    <div class="order-summary__feature"><span class="icon">✓</span> 100% thuốc chính hãng</div>
+                    <div class="order-summary__feature"><span class="icon">✓</span> Dược sĩ tư vấn miễn phí</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer__main">
+        <div>
+            <div class="footer__brand-name">🛡️ NhàThuốc+</div>
+            <p class="footer__brand-desc">Hệ thống nhà thuốc trực tuyến uy tín, chuyên nghiệp</p>
+        </div>
+        <div>
+            <div class="footer__col-title">Thông tin</div>
+            <div class="footer__links">
+                <a href="#" class="footer__link">Về chúng tôi</a>
+                <a href="#" class="footer__link">Liên hệ</a>
+                <a href="#" class="footer__link">Tuyển dụng</a>
+            </div>
+        </div>
+        <div>
+            <div class="footer__col-title">Hỗ trợ</div>
+            <div class="footer__links">
+                <a href="#" class="footer__link">Câu hỏi thường gặp</a>
+                <a href="#" class="footer__link">Chính sách đổi trả</a>
+                <a href="#" class="footer__link">Điều khoản sử dụng</a>
+            </div>
+        </div>
+        <div>
+            <div class="footer__col-title">Liên hệ</div>
+            <p class="footer__contact-item">Hotline: <span>1900 xxxx</span></p>
+            <p class="footer__contact-item">Email: <span>support@nhathuoc.vn</span></p>
+            <p class="footer__contact-item">Giờ làm việc: <span>24/7</span></p>
+        </div>
+    </div>
+    <div class="footer__bottom">© 2026 NhàThuốc+. Tất cả quyền được bảo lưu.</div>
+</footer>
+
+
+<script src="../js/main.js"></script>
+<script src="../js/cart.js"></script>
+</body>
+</html>

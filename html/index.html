@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NhàThuốc+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/index.css" />
+    <link rel="stylesheet" href="../css/pages/chat.css" />
+    <style>
+        /* ═══════════════════════════════════
+           HERO MỚI
+           ═══════════════════════════════════ */
+        .hero-new {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .hero-slide {
+            display: none;
+            min-height: 300px;
+            align-items: center;
+            padding: 48px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-slide.active { display: flex; animation: slideIn 0.45s ease; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(16px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        .hero-slide--1 { background: linear-gradient(125deg,#064e3b 0%,#065f46 35%,#0d9488 70%,#06b6d4 100%); }
+        .hero-slide--2 { background: linear-gradient(125deg,#7c2d12 0%,#c2410c 40%,#f97316 70%,#fbbf24 100%); }
+        .hero-slide--3 { background: linear-gradient(125deg,#1e1b4b 0%,#3730a3 40%,#6366f1 70%,#818cf8 100%); }
+
+        /* Decorative blobs */
+        .hero-slide::before {
+            content:''; position:absolute;
+            width:420px; height:420px; border-radius:50%;
+            background:rgba(255,255,255,0.07);
+            right:-80px; top:-120px; pointer-events:none;
+        }
+        .hero-slide::after {
+            content:''; position:absolute;
+            width:250px; height:250px; border-radius:50%;
+            background:rgba(255,255,255,0.05);
+            left:40%; bottom:-80px; pointer-events:none;
+        }
+
+        .hero-content { flex:1; position:relative; z-index:2; }
+        .hero-tag-new {
+            display:inline-flex; align-items:center; gap:6px;
+            background:rgba(255,255,255,0.15);
+            backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,0.25);
+            border-radius:999px; padding:5px 16px;
+            font-size:0.75rem; font-weight:700; color:#fff;
+            margin-bottom:18px; letter-spacing:0.3px;
+        }
+        .hero-title-new {
+            font-family:'Be Vietnam Pro', var(--font-display);
+            font-size:2.4rem; font-weight:900;
+            line-height:1.15; color:#fff;
+            margin-bottom:12px;
+            text-shadow:0 2px 24px rgba(0,0,0,0.2);
+        }
+        .hero-title-new em {
+            font-style:normal;
+            background:rgba(255,255,255,0.2);
+            backdrop-filter:blur(4px);
+            border-radius:10px; padding:2px 10px;
+        }
+        .hero-desc-new {
+            font-size:0.88rem; color:rgba(255,255,255,0.82);
+            margin-bottom:28px; line-height:1.65; max-width:400px;
+        }
+        .hero-btn-new {
+            display:inline-flex; align-items:center; gap:8px;
+            background:#fff; border-radius:12px;
+            padding:13px 28px; font-size:0.9rem; font-weight:800;
+            color:#111; text-decoration:none; border:none; cursor:pointer;
+            box-shadow:0 8px 28px rgba(0,0,0,0.22);
+            transition:all 0.2s; font-family:var(--font-body);
+        }
+        .hero-btn-new:hover { transform:translateY(-2px); box-shadow:0 12px 36px rgba(0,0,0,0.28); }
+        .hero-btn-new .arr { transition:transform 0.2s; }
+        .hero-btn-new:hover .arr { transform:translateX(5px); }
+
+        .hero-visual-new {
+            position:relative; z-index:2;
+            width:210px; height:210px; flex-shrink:0;
+            display:flex; align-items:center; justify-content:center;
+            font-size:7.5rem;
+            filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+            animation:floatHero 3.5s ease-in-out infinite;
+        }
+        @keyframes floatHero {
+            0%,100% { transform:translateY(0) rotate(-2deg); }
+            50%      { transform:translateY(-14px) rotate(2deg); }
+        }
+
+        /* Nav */
+        .hero-nav-new {
+            position:absolute; top:50%; transform:translateY(-50%);
+            width:40px; height:40px;
+            background:rgba(255,255,255,0.18); backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,0.3); border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer; color:#fff; font-size:1.1rem;
+            transition:all 0.2s; z-index:10;
+        }
+        .hero-nav-new:hover { background:rgba(255,255,255,0.32); }
+        .hero-nav-left  { left:14px; }
+        .hero-nav-right { right:14px; }
+
+        /* Dots */
+        .hero-dots-new {
+            position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
+            display:flex; gap:6px; z-index:10;
+        }
+        .hero-dot-new {
+            width:8px; height:8px; border-radius:999px;
+            background:rgba(255,255,255,0.35); border:none; cursor:pointer;
+            transition:all 0.3s;
+        }
+        .hero-dot-new.active { width:28px; background:#fff; }
+
+        /* ═══════════════════════════════════
+           SHORTCUT BAR
+           ═══════════════════════════════════ */
+        .shortcut-bar {
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:12px; margin-bottom:20px;
+        }
+        .shortcut-item {
+            background:#fff; border:1.5px solid var(--border);
+            border-radius:16px; padding:16px 10px;
+            display:flex; flex-direction:column;
+            align-items:center; gap:8px;
+            text-decoration:none; cursor:pointer;
+            transition:all 0.2s; text-align:center;
+        }
+        .shortcut-item:hover {
+            border-color:var(--primary);
+            box-shadow:0 4px 18px rgba(26,140,78,0.13);
+            transform:translateY(-2px);
+        }
+        .shortcut-item__icon {
+            width:46px; height:46px; border-radius:14px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.45rem;
+        }
+        .si-green  { background:#dcfce7; }
+        .si-blue   { background:#dbeafe; }
+        .si-orange { background:#ffedd5; }
+        .si-purple { background:#ede9fe; }
+        .si-pink   { background:#fce7f3; }
+        .shortcut-item__label { font-size:0.8rem; font-weight:700; color:var(--text-primary); line-height:1.3; }
+        .shortcut-item__sub   { font-size:0.68rem; color:var(--text-muted); line-height:1.3; }
+
+        /* ═══════════════════════════════════
+           BANNER PHỤ
+           ═══════════════════════════════════ */
+        .sub-banners {
+            display:grid; grid-template-columns:1.65fr 1fr;
+            gap:14px; margin-bottom:36px;
+        }
+        .sub-banner {
+            border-radius:20px; overflow:hidden; position:relative;
+            min-height:140px; display:flex; align-items:center;
+            padding:26px 30px; text-decoration:none; cursor:pointer;
+            transition:transform 0.2s, box-shadow 0.2s;
+        }
+        .sub-banner:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(0,0,0,0.15); }
+        .sub-banner--1 { background:linear-gradient(120deg,#134e4a 0%,#0f766e 50%,#2dd4bf 100%); }
+        .sub-banner--2 { background:linear-gradient(120deg,#581c87 0%,#7e22ce 50%,#a855f7 100%); }
+        .sub-banner::before {
+            content:''; position:absolute;
+            width:220px; height:220px; border-radius:50%;
+            background:rgba(255,255,255,0.07);
+            right:-40px; top:-60px; pointer-events:none;
+        }
+        .sub-banner__content { position:relative; z-index:2; flex:1; }
+        .sub-banner__tag {
+            display:inline-block;
+            background:rgba(255,255,255,0.18);
+            border-radius:999px; padding:3px 12px;
+            font-size:0.68rem; font-weight:700;
+            color:rgba(255,255,255,0.92);
+            margin-bottom:8px; letter-spacing:0.5px; text-transform:uppercase;
+        }
+        .sub-banner__title {
+            font-family:'Be Vietnam Pro', sans-serif;
+            font-size:1.1rem; font-weight:800;
+            color:#fff; line-height:1.3; margin-bottom:6px;
+        }
+        .sub-banner__desc { font-size:0.74rem; color:rgba(255,255,255,0.78); line-height:1.4; margin-bottom:14px; }
+        .sub-banner__btn {
+            display:inline-flex; align-items:center; gap:5px;
+            background:#fff; color:#111; border-radius:9px;
+            padding:7px 16px; font-size:0.76rem; font-weight:800;
+            border:none; cursor:pointer; transition:all 0.2s; font-family:var(--font-body);
+        }
+        .sub-banner__btn:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,0.2); }
+        .sub-banner__visual {
+            font-size:4.8rem; flex-shrink:0; position:relative; z-index:2;
+            filter:drop-shadow(0 8px 20px rgba(0,0,0,0.25));
+            animation:floatHero 4s ease-in-out infinite;
+        }
+        .sub-banner--2 .sub-banner__visual { font-size:3.6rem; }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header__inner">
+        <a href="index.html" class="header__logo">
+            <span class="header__logo-text">🛡️ NhàThuốc+</span>
+        </a>
+        <div class="header__search">
+            <form class="search-form">
+                <div class="search-bar">
+                    <span class="search-bar__icon">🔍</span>
+                    <input type="text" placeholder="Tìm thuốc, hoạt chất, triệu chứng…" />
+                </div>
+            </form>
+        </div>
+        <div class="header__actions">
+            <div id="header-guest">
+                <a href="login.html" class="btn btn-primary btn-sm">Đăng nhập</a>
+            </div>
+            <div id="header-user" class="header-user" style="display:none">
+                <div class="notif-wrap" id="notifWrap">
+                    <button class="header-icon-btn" id="notifBtn" onclick="toggleNotif()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <span class="header-icon-btn__badge" id="notifBadge" style="display:none">0</span>
+                    </button>
+                    <div class="notif-dropdown" id="notifDropdown">
+                        <div class="notif-dropdown__header">
+                            <span class="notif-dropdown__title">🔔 Thông báo</span>
+                            <span class="notif-dropdown__clear" onclick="clearNotifs()">Đánh dấu đã đọc</span>
+                        </div>
+                        <div class="notif-list" id="notifList"></div>
+                        <div class="notif-dropdown__footer" style="display:none"></div>
+                    </div>
+                </div>
+                <div class="notif-wrap">
+                    <a href="cart.html" class="header-icon-btn" title="Giỏ hàng">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        <span class="header-icon-btn__badge" id="cart-badge" style="display:none">0</span>
+                    </a>
+                </div>
+                <div class="header-avatar-wrap">
+                    <button class="header-avatar" onclick="toggleUserMenu()"><span id="avatar-letter">U</span></button>
+                    <div class="header-user-menu" id="user-menu">
+                        <div class="user-menu__info">
+                            <div class="user-menu__name" id="menu-name">Người dùng</div>
+                            <div class="user-menu__email" id="menu-email"></div>
+                        </div>
+                        <div class="user-menu__divider"></div>
+                        <a href="orders.html" class="user-menu__item">📦 Đơn hàng của tôi</a>
+                        <a href="settings.html" class="user-menu__item">⚙️ Cài đặt tài khoản</a>
+                        <div class="user-menu__divider"></div>
+                        <button class="user-menu__item user-menu__logout" onclick="logout()">🚪 Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+
+        <!-- ═══ HERO ═══ -->
+        <section class="section" style="margin-bottom:0">
+            <div class="hero-new">
+                <!-- Slide 1 – Xanh emerald -->
+                <div class="hero-slide hero-slide--1 active">
+                    <div class="hero-content">
+                        <div class="hero-tag-new">🚀 Nhanh nhất Hà Nội</div>
+                        <h1 class="hero-title-new">Giao thuốc tận nhà<br/>trong <em>2 giờ</em></h1>
+                        <p class="hero-desc-new">Đặt thuốc online dễ dàng — nhận hàng nhanh chóng tại nhà, không cần ra ngoài.</p>
+                        <a href="search.html" class="hero-btn-new">Mua ngay <span class="arr">→</span></a>
+                    </div>
+                    <div class="hero-visual-new">🚚</div>
+                </div>
+
+                <!-- Slide 2 – Cam rực -->
+                <div class="hero-slide hero-slide--2">
+                    <div class="hero-content">
+                        <div class="hero-tag-new">💊 Flash Sale hôm nay</div>
+                        <h1 class="hero-title-new">Giảm đến <em>33%</em><br/>thuốc thông dụng</h1>
+                        <p class="hero-desc-new">Hàng trăm sản phẩm giảm giá sâu — số lượng có hạn, nhanh tay kẻo hết!</p>
+                        <button class="hero-btn-new" id="btn-flash">Xem Flash Sale <span class="arr">→</span></button>
+                    </div>
+                    <div class="hero-visual-new">⚡</div>
+                </div>
+
+                <!-- Slide 3 – Tím indigo -->
+                <div class="hero-slide hero-slide--3">
+                    <div class="hero-content">
+                        <div class="hero-tag-new">👨‍⚕️ Tư vấn miễn phí</div>
+                        <h1 class="hero-title-new">Dược sĩ đồng hành<br/><em>24/7</em> cùng bạn</h1>
+                        <p class="hero-desc-new">Chat trực tiếp với dược sĩ — nhận tư vấn chuyên nghiệp ngay lập tức, miễn phí.</p>
+                        <button class="hero-btn-new" onclick="if(typeof toggleChat==='function')toggleChat()">Chat ngay <span class="arr">→</span></button>
+                    </div>
+                    <div class="hero-visual-new">👨‍⚕️</div>
+                </div>
+
+                <button class="hero-nav-new hero-nav-left"  onclick="heroGo(heroCur-1)">‹</button>
+                <button class="hero-nav-new hero-nav-right" onclick="heroGo(heroCur+1)">›</button>
+                <div class="hero-dots-new">
+                    <button class="hero-dot-new active" onclick="heroGo(0)"></button>
+                    <button class="hero-dot-new"        onclick="heroGo(1)"></button>
+                    <button class="hero-dot-new"        onclick="heroGo(2)"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ SHORTCUT ═══ -->
+        <section class="section" style="padding-top:18px; margin-bottom:0">
+            <div class="shortcut-bar">
+                <a href="search.html" class="shortcut-item">
+                    <div class="shortcut-item__icon si-green">🛒</div>
+                    <div><div class="shortcut-item__label">Cần mua thuốc</div><div class="shortcut-item__sub">Tìm & đặt ngay</div></div>
+                </a>
+                <a href="#" class="shortcut-item" onclick="event.preventDefault();if(typeof toggleChat==='function')toggleChat()">
+                    <div class="shortcut-item__icon si-blue">💬</div>
+                    <div><div class="shortcut-item__label">Tư vấn thuốc</div><div class="shortcut-item__sub">Dược sĩ 24/7</div></div>
+                </a>
+                <a href="orders.html" class="shortcut-item">
+                    <div class="shortcut-item__icon si-orange">📦</div>
+                    <div><div class="shortcut-item__label">Đơn hàng</div><div class="shortcut-item__sub">Theo dõi đơn</div></div>
+                </a>
+                <a href="search.html?sale=true" class="shortcut-item">
+                    <div class="shortcut-item__icon si-purple">⚡</div>
+                    <div><div class="shortcut-item__label">Flash Sale</div><div class="shortcut-item__sub">Giảm đến 40%</div></div>
+                </a>
+                <a href="search.html?cat=thiet-bi-y-te" class="shortcut-item">
+                    <div class="shortcut-item__icon si-pink">🩺</div>
+                    <div><div class="shortcut-item__label">Thiết bị y tế</div><div class="shortcut-item__sub">Đo huyết áp, SpO2</div></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Danh mục sản phẩm</h2>
+            </div>
+            <div class="categories-grid">
+                <a href="search.html?cat=thuoc-khong-ke-don" class="category-card"><div class="category-card__icon">💊</div><span class="category-card__name">Thuốc không kê đơn</span></a>
+                <a href="search.html?cat=vitamin-tpcn" class="category-card"><div class="category-card__icon">🍎</div><span class="category-card__name">Vitamin & TPCN</span></a>
+                <a href="search.html?cat=thiet-bi-y-te" class="category-card"><div class="category-card__icon">🩺</div><span class="category-card__name">Thiết bị y tế</span></a>
+                <a href="search.html?cat=cham-soc-ca-nhan" class="category-card"><div class="category-card__icon">✨</div><span class="category-card__name">Chăm sóc cá nhân</span></a>
+                <a href="search.html?cat=me-be" class="category-card"><div class="category-card__icon">👶</div><span class="category-card__name">Mẹ & Bé</span></a>
+                <a href="search.html?cat=thuoc-xit-mui" class="category-card"><div class="category-card__icon">💧</div><span class="category-card__name">Thuốc xịt mũi</span></a>
+            </div>
+        </section>
+
+        <!-- FLASH SALE -->
+        <section id="flash-sale" class="flash-sale-section">
+            <div class="flash-sale-header">
+                <div class="flash-sale-left">
+                    <div class="flash-sale-title"><span class="lightning">⚡</span>FLASH SALE</div>
+                    <div class="flash-countdown">
+                        <span class="flash-countdown__label">Kết thúc trong</span>
+                        <div class="countdown-block"><span class="countdown-block__num" id="cd-h">02</span><span class="countdown-block__label">Giờ</span></div>
+                        <span class="countdown-sep">:</span>
+                        <div class="countdown-block"><span class="countdown-block__num" id="cd-m">45</span><span class="countdown-block__label">Phút</span></div>
+                        <span class="countdown-sep">:</span>
+                        <div class="countdown-block"><span class="countdown-block__num" id="cd-s">30</span><span class="countdown-block__label">Giây</span></div>
+                    </div>
+                </div>
+                <a href="search.html?sale=true" class="flash-sale-link">Xem tất cả →</a>
+            </div>
+            <div class="flash-sale-body">
+                <div class="flash-products-grid">
+                    <a href="product.html?id=1" class="flash-card"><div class="flash-card__image"><img src="../image/C.webp" alt="Vitamin C"/><span class="flash-card__badge">-19%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:72%"></div></div><span class="flash-card__progress-text">Đã bán 72%</span></div><div class="flash-card__body"><div class="flash-card__name">Vitamin C 500mg</div><div class="flash-card__ingredient">Ascorbic Acid</div><div class="flash-card__price"><span class="flash-card__price-current">145.000đ</span><span class="flash-card__price-original">180.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(1,'Vitamin C 500mg',145000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=2" class="flash-card"><div class="flash-card__image"><img src="../image/P.png" alt="Paracetamol"/><span class="flash-card__badge">-29%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:88%"></div></div><span class="flash-card__progress-text">Đã bán 88%</span></div><div class="flash-card__body"><div class="flash-card__name">Paracetamol 500mg</div><div class="flash-card__ingredient">Paracetamol</div><div class="flash-card__price"><span class="flash-card__price-current">25.000đ</span><span class="flash-card__price-original">35.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(2,'Paracetamol 500mg',25000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=3" class="flash-card"><div class="flash-card__image"><img src="../image/N.webp" alt="Nhiệt kế"/><span class="flash-card__badge">-33%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:55%"></div></div><span class="flash-card__progress-text">Đã bán 55%</span></div><div class="flash-card__body"><div class="flash-card__name">Nhiệt kế điện tử</div><div class="flash-card__ingredient">Đo thân nhiệt chính xác</div><div class="flash-card__price"><span class="flash-card__price-current">120.000đ</span><span class="flash-card__price-original">180.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(3,'Nhiệt kế điện tử',120000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=4" class="flash-card"><div class="flash-card__image"><img src="../image/K.webp" alt="Kem dưỡng"/><span class="flash-card__badge">-29%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:63%"></div></div><span class="flash-card__progress-text">Đã bán 63%</span></div><div class="flash-card__body"><div class="flash-card__name">Kem dưỡng da</div><div class="flash-card__ingredient">Niacinamide + Hyaluronic Acid</div><div class="flash-card__price"><span class="flash-card__price-current">320.000đ</span><span class="flash-card__price-original">450.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(4,'Kem dưỡng da',320000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=5" class="flash-card"><div class="flash-card__image"><img src="../image/S.jpg" alt="Aptamil"/><span class="flash-card__badge">-11%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:41%"></div></div><span class="flash-card__progress-text">Đã bán 41%</span></div><div class="flash-card__body"><div class="flash-card__name">Sữa bột Aptamil</div><div class="flash-card__ingredient">Dinh dưỡng cho trẻ 0–12 tháng</div><div class="flash-card__price"><span class="flash-card__price-current">580.000đ</span><span class="flash-card__price-original">650.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(5,'Sữa bột Aptamil',580000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=6" class="flash-card"><div class="flash-card__image"><img src="../image/o.png" alt="Omega 3"/><span class="flash-card__badge">-25%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:58%"></div></div><span class="flash-card__progress-text">Đã bán 58%</span></div><div class="flash-card__body"><div class="flash-card__name">Omega-3 Fish Oil</div><div class="flash-card__ingredient">EPA + DHA 1000mg</div><div class="flash-card__price"><span class="flash-card__price-current">210.000đ</span><span class="flash-card__price-original">280.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(6,'Omega-3 Fish Oil',210000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=7" class="flash-card"><div class="flash-card__image"><img src="../image/1.webp" alt="Khẩu trang"/><span class="flash-card__badge">-40%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:91%"></div></div><span class="flash-card__progress-text">Đã bán 91%</span></div><div class="flash-card__body"><div class="flash-card__name">Khẩu trang y tế 4D</div><div class="flash-card__ingredient">Hộp 10 cái kháng khuẩn</div><div class="flash-card__price"><span class="flash-card__price-current">30.000đ</span><span class="flash-card__price-original">50.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(7,'Khẩu trang y tế 4D',30000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=8" class="flash-card"><div class="flash-card__image"><img src="../image/g.webp" alt="Gel tay"/><span class="flash-card__badge">-20%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:47%"></div></div><span class="flash-card__progress-text">Đã bán 47%</span></div><div class="flash-card__body"><div class="flash-card__name">Gel rửa tay khô</div><div class="flash-card__ingredient">Cồn 70% kháng khuẩn</div><div class="flash-card__price"><span class="flash-card__price-current">48.000đ</span><span class="flash-card__price-original">60.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(8,'Gel rửa tay khô',48000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=9" class="flash-card"><div class="flash-card__image"><img src="../image/v.jpg" alt="Vitamin D3"/><span class="flash-card__badge">-22%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:34%"></div></div><span class="flash-card__progress-text">Đã bán 34%</span></div><div class="flash-card__body"><div class="flash-card__name">Vitamin D3 2000IU</div><div class="flash-card__ingredient">Cholecalciferol</div><div class="flash-card__price"><span class="flash-card__price-current">175.000đ</span><span class="flash-card__price-original">225.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(9,'Vitamin D3 2000IU',175000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                    <a href="product.html?id=10" class="flash-card"><div class="flash-card__image"><img src="../image/t.jpg" alt="Thuốc ho"/><span class="flash-card__badge">-15%</span></div><div class="flash-card__progress-wrap"><div class="flash-card__progress-bg"><div class="flash-card__progress-fill" style="width:79%"></div></div><span class="flash-card__progress-text">Đã bán 79%</span></div><div class="flash-card__body"><div class="flash-card__name">Thuốc ho Bảo Thanh</div><div class="flash-card__ingredient">Cao lá thường xuân</div><div class="flash-card__price"><span class="flash-card__price-current">85.000đ</span><span class="flash-card__price-original">100.000đ</span></div><button class="flash-card__btn" onclick="event.preventDefault();addToCart(10,'Thuốc ho Bảo Thanh',85000,this.closest('.flash-card').querySelector('img').src)">Thêm vào giỏ</button></div></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES BAR -->
+        <div class="features-bar">
+            <div class="feature-item"><div class="feature-item__icon green">🚚</div><div><div class="feature-item__title">Giao hàng nhanh</div><div class="feature-item__desc">Giao trong 2 giờ</div></div></div>
+            <div class="feature-item"><div class="feature-item__icon blue">🛡️</div><div><div class="feature-item__title">100% chính hãng</div><div class="feature-item__desc">Cam kết chất lượng</div></div></div>
+            <div class="feature-item"><div class="feature-item__icon purple">👨‍⚕️</div><div><div class="feature-item__title">Dược sĩ tư vấn</div><div class="feature-item__desc">Hỗ trợ 24/7</div></div></div>
+            <div class="feature-item"><div class="feature-item__icon yellow">⭐</div><div><div class="feature-item__title">Ưu đãi hấp dẫn</div><div class="feature-item__desc">Giảm giá mỗi ngày</div></div></div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer__main">
+        <div><div class="footer__brand-name">🛡️ NhàThuốc+</div><p class="footer__brand-desc">Hệ thống nhà thuốc trực tuyến uy tín, chuyên nghiệp</p></div>
+        <div><div class="footer__col-title">Thông tin</div><div class="footer__links"><a href="about.html" class="footer__link">Về chúng tôi</a><a href="contact.html" class="footer__link">Liên hệ</a></div></div>
+        <div><div class="footer__col-title">Hỗ trợ</div><div class="footer__links"><a href="faq.html" class="footer__link">Câu hỏi thường gặp</a><a href="return-policy.html" class="footer__link">Chính sách đổi trả</a><a href="terms.html" class="footer__link">Điều khoản sử dụng</a></div></div>
+        <div><div class="footer__col-title">Liên hệ</div><p class="footer__contact-item">Hotline: <span>1900 0000</span></p><p class="footer__contact-item">Email: <span>support@nhathuoc.vn</span></p><p class="footer__contact-item">Giờ làm việc: <span>24/7</span></p></div>
+    </div>
+</footer>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()">
+    <span class="chat-fab__badge" id="chatBadge">1</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <div class="chat-header__avatar" id="headerAvatar">🤖</div>
+        <div class="chat-header__info">
+            <div class="chat-header__name" id="headerName">Dược sĩ Bot</div>
+            <div class="chat-header__status" id="headerStatus"><span class="chat-header__status-dot"></span>NhàThuốc+ AI Assistant</div>
+        </div>
+        <button class="chat-header__close" onclick="toggleChat()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="chat-state active" id="state-chatbot">
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg bot"><div class="msg__avatar">🤖</div><div><div class="msg__bubble">Xin chào! Tôi là Dược sĩ Bot của NhàThuốc+. Bạn đang gặp triệu chứng gì?</div><div class="msg__time" id="initTime"></div></div></div>
+        </div>
+        <div class="chat-quickreplies" id="quickReplies">
+            <button class="qr-btn" onclick="selectSymptom('Ho khan')">Ho khan</button>
+            <button class="qr-btn" onclick="selectSymptom('Sốt')">Sốt</button>
+            <button class="qr-btn" onclick="selectSymptom('Đau đầu')">Đau đầu</button>
+            <button class="qr-btn" onclick="connectDoctor()">Gặp Dược sĩ</button>
+        </div>
+        <div class="chat-input-bar">
+            <input class="chat-input" id="chatInput" placeholder="Nhập tin nhắn..." onkeydown="onEnter(event)" />
+            <button class="chat-send" onclick="sendMessage()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+    </div>
+    <div class="chat-state" id="state-loading">
+        <div class="chat-loading"><div class="loading-spinner"></div><div class="loading-title">Đang kết nối với Dược sĩ...</div><div class="loading-sub">Vui lòng đợi trong giây lát</div></div>
+    </div>
+    <div class="chat-state" id="state-live">
+        <div class="chat-messages" id="liveMessages"></div>
+        <div class="chat-input-bar">
+            <input class="chat-input" id="liveInput" placeholder="Nhập tin nhắn..." onkeydown="onEnterLive(event)" />
+            <button class="chat-send" onclick="sendLiveMessage()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/index.js"></script>
+<script src="../js/chat.js"></script>
+<script>
+    // Hero slider
+    let heroCur = 0;
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots   = document.querySelectorAll('.hero-dot-new');
+    function heroGo(idx) {
+        heroSlides[heroCur].classList.remove('active');
+        heroDots[heroCur].classList.remove('active');
+        heroCur = (idx + heroSlides.length) % heroSlides.length;
+        heroSlides[heroCur].classList.add('active');
+        heroDots[heroCur].classList.add('active');
+    }
+    setInterval(() => heroGo(heroCur + 1), 5000);
+
+    document.getElementById('btn-flash')?.addEventListener('click', function() {
+        document.getElementById('flash-sale')?.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+
+    // Countdown
+    (function() {
+        const end = Date.now() + (2*3600 + 45*60 + 30)*1000;
+        function tick() {
+            const d = Math.max(0, end - Date.now());
+            const h = Math.floor(d/3600000), m = Math.floor((d%3600000)/60000), s = Math.floor((d%60000)/1000);
+            const hEl=document.getElementById('cd-h'), mEl=document.getElementById('cd-m'), sEl=document.getElementById('cd-s');
+            if(hEl) hEl.textContent=String(h).padStart(2,'0');
+            if(mEl) mEl.textContent=String(m).padStart(2,'0');
+            if(sEl) sEl.textContent=String(s).padStart(2,'0');
+        }
+        tick(); setInterval(tick,1000);
+    })();
+</script>
+</body>
+</html>

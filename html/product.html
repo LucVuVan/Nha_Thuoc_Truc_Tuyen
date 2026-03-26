@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sản phẩm – NhàThuốc+</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/chat.css" />
+    <style>
+        .product-layout { display: grid; grid-template-columns: 420px 1fr; gap: 32px; align-items: start; }
+        .gallery__main {
+          background: #f8fbf9; border-radius: var(--radius-xl);
+          border: 1px solid var(--border); aspect-ratio: 1;
+          display: flex; align-items: center; justify-content: center;
+          overflow: hidden; position: relative;
+        }
+        .gallery__main img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-xl); }
+        .gallery__expiry {
+          position: absolute; top: 14px; left: 14px;
+          background: rgba(26,140,78,0.12); border: 1px solid rgba(26,140,78,0.25);
+          color: var(--primary); font-size: 0.78rem; font-weight: 600;
+          padding: 5px 12px; border-radius: var(--radius-full);
+        }
+        .gallery__thumbs { display: flex; gap: 10px; margin-top: 12px; }
+        .gallery__thumb {
+          width: 72px; height: 72px; border-radius: var(--radius-md);
+          overflow: hidden; border: 2px solid transparent;
+          cursor: pointer; background: #f8fbf9; transition: var(--transition);
+          display: flex; align-items: center; justify-content: center;
+        }
+        .gallery__thumb.active { border-color: var(--primary); }
+        .gallery__thumb:hover { border-color: var(--primary); }
+        .gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery__thumb-label { text-align: center; font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+        .product-info { display: flex; flex-direction: column; gap: 16px; }
+        .product-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; line-height: 1.3; color: var(--text-primary); }
+        .product-ingredient { font-size: 0.85rem; color: var(--text-secondary); }
+        .product-ingredient span { font-weight: 600; color: var(--primary); }
+        .product-rating { display: flex; align-items: center; gap: 10px; }
+        .product-price-block { display: flex; align-items: baseline; gap: 12px; }
+        .product-price-main { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+        .product-price-original { font-size: 1rem; color: var(--text-muted); text-decoration: line-through; }
+        .product-qty-row { display: flex; align-items: center; gap: 12px; }
+        .product-qty-label { font-size: 0.85rem; font-weight: 600; }
+        .product-qty-max { font-size: 0.78rem; color: var(--text-muted); }
+        .product-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn-add-cart {
+          background: var(--primary); color: var(--white); border: none;
+          border-radius: var(--radius-md); padding: 14px 20px;
+          font-size: 0.95rem; font-weight: 700; cursor: pointer;
+          display: flex; align-items: center; justify-content: center; gap: 8px;
+          transition: var(--transition);
+        }
+        .btn-add-cart:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-buy-now {
+          background: var(--white); color: var(--primary);
+          border: 2px solid var(--primary); border-radius: var(--radius-md);
+          padding: 14px 20px; font-size: 0.95rem; font-weight: 700;
+          cursor: pointer; transition: var(--transition);
+        }
+        .btn-buy-now:hover { background: var(--primary-light); }
+        .guarantees { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .guarantee-item {
+          background: #f8fbf9; border: 1px solid var(--border);
+          border-radius: var(--radius-md); padding: 12px 14px;
+          display: flex; align-items: center; gap: 10px; font-size: 0.82rem;
+        }
+        .guarantee-item__icon { font-size: 1.1rem; }
+        .guarantee-item__title { font-weight: 600; color: var(--text-primary); }
+        .guarantee-item__desc { color: var(--text-muted); font-size: 0.75rem; }
+        .detail-section { margin-top: 40px; display: grid; grid-template-columns: 1fr 280px; gap: 28px; align-items: start; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .detail-text { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+        .detail-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+        .detail-list-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: var(--text-secondary); }
+        .detail-list-item::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+        .warning-box {
+          background: #fffbeb; border: 1px solid #fcd34d;
+          border-radius: var(--radius-md); padding: 14px 16px; margin-top: 16px;
+          display: flex; gap: 10px; font-size: 0.83rem; color: #92400e;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header__inner">
+        <a href="index.html" class="header__logo">
+            <span class="header__logo-text">🛡️ NhàThuốc+</span>
+        </a>
+        <div class="header__search">
+            <form class="search-form">
+                <div class="search-bar">
+                    <span class="search-bar__icon">🔍</span>
+                    <input type="text" placeholder="Tìm thuốc, hoạt chất, triệu chứng…" />
+                </div>
+            </form>
+        </div>
+        <div class="header__actions">
+            <a href="#" class="header__icon-btn">👤</a>
+            <a href="cart.html" class="header__icon-btn">🛒<span class="header__cart-badge">0</span></a>
+            <a href="login.html" class="btn btn-primary btn-sm">Đăng nhập</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="index.html">🏠 Trang chủ</a>
+            <span class="breadcrumb__sep">›</span>
+            <a href="#" id="breadCat">Danh mục</a>
+            <span class="breadcrumb__sep">›</span>
+            <span class="breadcrumb__current" id="breadSub">Sản phẩm</span>
+        </nav>
+
+        <!-- Product main -->
+        <div class="product-layout">
+            <div>
+                <div class="gallery__main">
+                    <img id="mainImg" src="" alt="" />
+                    <span class="gallery__expiry" id="productExpiry"></span>
+                </div>
+                <div class="gallery__thumbs" id="thumbsContainer"></div>
+            </div>
+
+            <div class="product-info">
+                <div class="product-name" id="productName"></div>
+                <div class="product-ingredient">Hoạt chất: <span id="productIngredient"></span></div>
+                <p id="productDesc" style="font-size:0.85rem; color:var(--text-secondary); line-height:1.6"></p>
+                <div class="product-rating">
+                    <div class="stars" id="productStars"></div>
+                    <span style="font-weight:700; font-size:0.9rem" id="productRating"></span>
+                    <span class="stars__count" id="productRatingCount"></span>
+                </div>
+                <div class="product-price-block">
+                    <span class="product-price-main" id="productPrice"></span>
+                    <span class="product-price-original" id="productOriginalPrice"></span>
+                    <span class="discount-badge" id="productDiscount"></span>
+                </div>
+                <div style="color:var(--text-muted); font-size:0.78rem" id="productUnit"></div>
+                <div class="product-qty-row">
+                    <span class="product-qty-label">Số lượng:</span>
+                    <div class="qty-control">
+                        <button class="qty-control__btn" data-action="minus">−</button>
+                        <input type="number" value="1" min="1" max="10" id="qtyInput" />
+                        <button class="qty-control__btn" data-action="plus">+</button>
+                    </div>
+                    <span class="product-qty-max">(Tối đa 10/đơn)</span>
+                </div>
+                <div class="product-cta">
+                    <button class="btn-add-cart" onclick="addToCartProduct()">🛒 Thêm vào giỏ</button>
+                    <button class="btn-buy-now" onclick="window.location.href='checkout.html'">Mua ngay</button>
+                </div>
+                <div class="guarantees">
+                    <div class="guarantee-item">
+                        <span class="guarantee-item__icon">✅</span>
+                        <div><div class="guarantee-item__title">100% chính hãng</div><div class="guarantee-item__desc">Cam kết từ nhà sản xuất</div></div>
+                    </div>
+                    <div class="guarantee-item">
+                        <span class="guarantee-item__icon">🚚</span>
+                        <div><div class="guarantee-item__title">Giao hàng nhanh</div><div class="guarantee-item__desc">Trong vòng 2 giờ</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Tabs -->
+        <div class="detail-section">
+            <div>
+                <div class="tabs">
+                    <div class="tab-item active" data-target="tab-congdung">Công dụng</div>
+                    <div class="tab-item" data-target="tab-lieudung">Liều dùng</div>
+                    <div class="tab-item" data-target="tab-thanhphan">Thành phần</div>
+                    <div class="tab-item" data-target="tab-chongchidinh">Chống chỉ định</div>
+                </div>
+                <div style="padding-top:24px">
+                    <div id="tab-congdung" class="tab-content active">
+                        <p class="detail-text" id="tabCongDungText"></p>
+                        <div class="detail-list" id="tabCongDungList"></div>
+                        <div class="warning-box">
+                            <span>⚠️</span>
+                            <div id="tabWarningText"></div>
+                        </div>
+                    </div>
+                    <div id="tab-lieudung" class="tab-content">
+                        <p class="detail-text" id="tabLieuDung"></p>
+                    </div>
+                    <div id="tab-thanhphan" class="tab-content">
+                        <p class="detail-text" id="tabThanhPhan"></p>
+                    </div>
+                    <div id="tab-chongchidinh" class="tab-content">
+                        <p class="detail-text" id="tabChongChiDinh"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="consultant-box">
+                <div class="consultant-box__avatar">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=120&h=120&fit=crop&face" alt="Dược sĩ" />
+                </div>
+                <div class="consultant-box__title">Cần tư vấn?</div>
+                <p class="consultant-box__desc">Dược sĩ của chúng tôi sẵn sàng tư vấn miễn phí 24/7</p>
+                <button class="consultant-box__btn" onclick="toggleChat()">💬 Chat với Dược sĩ</button>
+                <div class="consultant-box__features">
+                    <div class="consultant-box__feature">✓ Tư vấn miễn phí</div>
+                    <div class="consultant-box__feature">✓ Phản hồi trong 2 phút</div>
+                    <div class="consultant-box__feature">✓ Bảo mật thông tin</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()">
+    <span class="chat-fab__badge" id="chatBadge">1</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+</button>
+<div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+        <div class="chat-header__avatar" id="headerAvatar">🤖</div>
+        <div class="chat-header__info">
+            <div class="chat-header__name" id="headerName">Dược sĩ Bot</div>
+            <div class="chat-header__status" id="headerStatus"><span class="chat-header__status-dot"></span>NhàThuốc+ AI Assistant</div>
+        </div>
+        <button class="chat-header__close" onclick="toggleChat()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="chat-state active" id="state-chatbot">
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg bot"><div class="msg__avatar">🤖</div><div><div class="msg__bubble">Xin chào! Tôi là Dược sĩ Bot của NhàThuốc+. Bạn đang gặp triệu chứng gì?</div><div class="msg__time" id="initTime"></div></div></div>
+        </div>
+        <div class="chat-quickreplies" id="quickReplies">
+            <button class="qr-btn" onclick="selectSymptom('Ho khan')">Ho khan</button>
+            <button class="qr-btn" onclick="selectSymptom('Sốt')">Sốt</button>
+            <button class="qr-btn" onclick="selectSymptom('Đau đầu')">Đau đầu</button>
+            <button class="qr-btn" onclick="connectDoctor()">Gặp Dược sĩ</button>
+        </div>
+        <div class="chat-input-bar">
+            <input class="chat-input" id="chatInput" placeholder="Nhập tin nhắn..." onkeydown="onEnter(event)" />
+            <button class="chat-send" onclick="sendMessage()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+    </div>
+    <div class="chat-state" id="state-loading">
+        <div class="chat-loading"><div class="loading-spinner"></div><div class="loading-title">Đang kết nối với Dược sĩ...</div><div class="loading-sub">Vui lòng đợi trong giây lát</div></div>
+    </div>
+    <div class="chat-state" id="state-live">
+        <div class="chat-messages" id="liveMessages"></div>
+        <div class="chat-input-bar">
+            <input class="chat-input" id="liveInput" placeholder="Nhập tin nhắn..." onkeydown="onEnterLive(event)" />
+            <button class="chat-send" onclick="sendLiveMessage()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+    </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/products-data.js"></script>
+<script>
+    let currentProduct = null;
+
+    function formatPrice(n) {
+      return new Intl.NumberFormat('vi-VN').format(n) + 'đ';
+    }
+    function renderStars(rating) {
+      const full = Math.floor(rating);
+      return '★'.repeat(full) + `<span style="color:var(--border)">${'★'.repeat(5 - full)}</span>`;
+    }
+    function setImg(thumb, src) {
+      document.getElementById('mainImg').src = src;
+      document.querySelectorAll('.gallery__thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    }
+
+    function loadProduct() {
+      const id = parseInt(new URLSearchParams(window.location.search).get('id')) || 1;
+      const p  = PRODUCTS_DATA[id];
+      if (!p) return;
+      currentProduct = p;
+
+      document.title = p.name + ' – NhàThuốc+';
+
+      // Breadcrumb
+      const bc = document.getElementById('breadCat');
+      bc.textContent = p.cat; bc.href = p.catLink;
+      document.getElementById('breadSub').textContent = p.catSub;
+
+      // Gallery
+      document.getElementById('mainImg').src = p.imgs[0];
+      document.getElementById('mainImg').alt = p.name;
+      document.getElementById('productExpiry').textContent =
+        p.expiry.startsWith('BH') ? p.expiry : 'Hạn sử dụng: ' + p.expiry;
+
+      document.getElementById('thumbsContainer').innerHTML = p.imgs.map((img, i) => `
+        <div>
+          <div class="gallery__thumb ${i === 0 ? 'active' : ''}"
+               onclick="setImg(this, '${img}')">
+            <img src="${img.replace('w=600&h=600', 'w=200&h=200')}" alt="" />
+          </div>
+          <div class="gallery__thumb-label">${p.thumbLabels[i] || ''}</div>
+        </div>`).join('');
+
+      // Info
+      document.getElementById('productName').textContent        = p.name;
+      document.getElementById('productIngredient').textContent  = p.ingredient;
+      document.getElementById('productDesc').textContent        = p.desc;
+      document.getElementById('productStars').innerHTML         = renderStars(p.rating);
+      document.getElementById('productRating').textContent      = p.rating + '/5';
+      document.getElementById('productRatingCount').textContent = `(${p.ratingCount} đánh giá)`;
+      document.getElementById('productPrice').textContent       = formatPrice(p.price);
+      document.getElementById('productOriginalPrice').textContent = formatPrice(p.originalPrice);
+      document.getElementById('productDiscount').textContent    = '-' + p.discount + '%';
+      document.getElementById('productUnit').textContent        = p.unit;
+
+      // Tabs
+      const t = p.tabs;
+      document.getElementById('tabCongDungText').textContent = t.congdung.text;
+      document.getElementById('tabCongDungList').innerHTML   = t.congdung.list
+        .map(item => `<div class="detail-list-item">${item}</div>`).join('');
+      document.getElementById('tabWarningText').innerHTML    = `<strong>Lưu ý:</strong> ${t.congdung.warning}`;
+      document.getElementById('tabLieuDung').textContent     = t.lieudung;
+      document.getElementById('tabThanhPhan').textContent    = t.thanhphan;
+      document.getElementById('tabChongChiDinh').textContent = t.chongchidinh;
+    }
+
+    function addToCartProduct() {
+      if (!currentProduct) return;
+      const qty = parseInt(document.getElementById('qtyInput')?.value) || 1;
+      for (let i = 0; i < qty; i++) {
+        Cart.add({
+          id:    currentProduct.id,
+          name:  currentProduct.name,
+          price: currentProduct.price,
+          img:   currentProduct.imgs[0],
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadProduct);
+</script>
+<script src="../js/chat.js"></script>
+</body>
+</html>

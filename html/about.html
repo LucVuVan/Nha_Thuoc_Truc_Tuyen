@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Về chúng tôi – NhàThuốc+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Be Vietnam Pro',sans-serif;background:#f5f9f6;color:#1a2e22}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        /* HERO */
+        .about-hero{background:linear-gradient(135deg,#064e3b 0%,#065f46 40%,#0d9488 80%,#06b6d4 100%);padding:80px 0 100px;position:relative;overflow:hidden}
+        .about-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(255,255,255,0.07) 0%,transparent 60%)}
+        .about-hero::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,0.05);right:-100px;top:-150px}
+        .about-hero__inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:40px}
+        .about-hero__tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);border-radius:999px;padding:5px 16px;font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:20px}
+        .about-hero__title{font-size:3rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px;text-shadow:0 2px 24px rgba(0,0,0,0.2)}
+        .about-hero__title span{color:#6ee7b7}
+        .about-hero__desc{font-size:1rem;color:rgba(255,255,255,0.82);line-height:1.7;max-width:500px}
+        .about-hero__visual{font-size:8rem;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3));animation:float 3.5s ease-in-out infinite;flex-shrink:0}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+        /* STATS */
+        .stats-bar{background:#fff;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.08);display:grid;grid-template-columns:repeat(4,1fr);margin-top:-40px;position:relative;z-index:10;overflow:hidden}
+        .stat-item{padding:28px 20px;text-align:center;border-right:1px solid #f0f0f0;transition:background 0.2s}
+        .stat-item:last-child{border-right:none}
+        .stat-item:hover{background:#f0fdf4}
+        .stat-item__num{font-size:2rem;font-weight:900;color:#065f46;line-height:1;margin-bottom:6px}
+        .stat-item__num span{color:#10b981}
+        .stat-item__label{font-size:0.8rem;color:#6b7280;font-weight:600}
+
+        /* SECTIONS */
+        .section{padding:64px 0}
+        .section-label{display:inline-flex;align-items:center;gap:8px;background:#dcfce7;color:#065f46;border-radius:999px;padding:5px 16px;font-size:0.75rem;font-weight:700;margin-bottom:16px;letter-spacing:0.5px;text-transform:uppercase}
+        .section-title{font-size:2rem;font-weight:900;color:#1a2e22;line-height:1.2;margin-bottom:12px}
+        .section-title span{color:#065f46}
+        .section-desc{font-size:0.95rem;color:#6b7280;line-height:1.7;max-width:580px}
+
+        /* MISSION */
+        .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+        .mission-visual{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:24px;padding:48px;display:flex;align-items:center;justify-content:center;font-size:9rem;box-shadow:0 8px 32px rgba(6,95,70,0.1);aspect-ratio:1}
+        .mission-points{display:flex;flex-direction:column;gap:20px;margin-top:32px}
+        .mission-point{display:flex;align-items:flex-start;gap:14px;background:#fff;border-radius:14px;padding:18px 20px;border:1.5px solid #e8f5ee;transition:all 0.2s}
+        .mission-point:hover{border-color:#10b981;box-shadow:0 4px 16px rgba(16,185,129,0.1);transform:translateX(4px)}
+        .mission-point__icon{width:44px;height:44px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+        .mission-point__title{font-weight:700;font-size:0.9rem;color:#1a2e22;margin-bottom:4px}
+        .mission-point__desc{font-size:0.8rem;color:#6b7280;line-height:1.5}
+
+        /* VALUES */
+        .values-section{background:linear-gradient(135deg,#064e3b,#065f46);border-radius:28px;padding:56px}
+        .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+        .value-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);border-radius:18px;padding:28px 24px;transition:all 0.2s}
+        .value-card:hover{background:rgba(255,255,255,0.14);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.2)}
+        .value-card__icon{font-size:2.4rem;margin-bottom:14px}
+        .value-card__title{font-size:1rem;font-weight:800;color:#fff;margin-bottom:8px}
+        .value-card__desc{font-size:0.8rem;color:rgba(255,255,255,0.72);line-height:1.6}
+
+        /* TEAM */
+        .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+        .team-card{background:#fff;border-radius:20px;overflow:hidden;border:1.5px solid #f0f0f0;transition:all 0.2s;text-align:center}
+        .team-card:hover{border-color:#10b981;box-shadow:0 8px 28px rgba(16,185,129,0.12);transform:translateY(-4px)}
+        .team-card__avatar{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#ecfdf5,#a7f3d0);display:flex;align-items:center;justify-content:center;font-size:4.5rem}
+        .team-card__body{padding:16px}
+        .team-card__name{font-weight:800;font-size:0.92rem;color:#1a2e22;margin-bottom:4px}
+        .team-card__role{font-size:0.75rem;color:#10b981;font-weight:600;margin-bottom:8px}
+        .team-card__desc{font-size:0.74rem;color:#9ca3af;line-height:1.5}
+
+        /* PROMISE */
+        .promise-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+        .promise-card{background:#fff;border-radius:18px;padding:28px;border:1.5px solid #f0f0f0;display:flex;gap:18px;align-items:flex-start;transition:all 0.2s}
+        .promise-card:hover{border-color:#10b981;box-shadow:0 6px 20px rgba(16,185,129,0.1)}
+        .promise-card__icon{width:52px;height:52px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+        .pc-green{background:#dcfce7}.pc-blue{background:#dbeafe}.pc-orange{background:#ffedd5}.pc-purple{background:#ede9fe}
+        .promise-card__title{font-weight:800;font-size:0.95rem;color:#1a2e22;margin-bottom:6px}
+        .promise-card__desc{font-size:0.8rem;color:#6b7280;line-height:1.6}
+
+        /* CTA */
+        .cta-section{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:24px;padding:56px;text-align:center;border:1.5px solid #bbf7d0}
+        .cta-section__title{font-size:1.8rem;font-weight:900;color:#1a2e22;margin-bottom:12px}
+        .cta-section__desc{font-size:0.95rem;color:#6b7280;margin-bottom:28px;line-height:1.6}
+        .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+        .btn-g{background:#065f46;color:#fff;border-radius:12px;padding:14px 32px;font-size:0.9rem;font-weight:800;text-decoration:none;border:none;cursor:pointer;transition:all 0.2s;font-family:inherit;box-shadow:0 4px 16px rgba(6,95,70,0.3)}
+        .btn-g:hover{background:#047857;transform:translateY(-2px)}
+        .btn-w{background:#fff;color:#065f46;border:2px solid #065f46;border-radius:12px;padding:13px 32px;font-size:0.9rem;font-weight:800;text-decoration:none;cursor:pointer;transition:all 0.2s;font-family:inherit}
+        .btn-w:hover{background:#f0fdf4;transform:translateY(-2px)}
+
+        /* BREADCRUMB */
+        .breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:#9ca3af;padding:16px 0}
+        .breadcrumb a{color:#065f46;text-decoration:none;font-weight:600}
+        .breadcrumb__sep{color:#d1d5db}
+
+        /* NAV HOVER */
+        nav a:hover{color:#065f46 !important}
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .fade-up{animation:fadeUp 0.5s ease both}
+        .fade-up-1{animation-delay:0.1s}.fade-up-2{animation-delay:0.2s}
+        .fade-up-3{animation-delay:0.3s}.fade-up-4{animation-delay:0.4s}
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header style="background:#fff;border-bottom:1px solid #e8f5ee;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+        <a href="index.html" style="text-decoration:none;font-size:1.1rem;font-weight:900;color:#065f46;font-family:'Be Vietnam Pro',sans-serif;">🛡️ NhàThuốc+</a>
+        <nav style="display:flex;align-items:center;gap:20px;">
+            <a href="index.html"         style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Trang chủ</a>
+            <a href="about.html"         style="font-size:0.85rem;font-weight:700;color:#065f46;text-decoration:none;border-bottom:2px solid #065f46;padding-bottom:2px;">Về chúng tôi</a>
+            <a href="contact.html"       style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Liên hệ</a>
+            <a href="faq.html"           style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">FAQ</a>
+            <a href="return-policy.html" style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Đổi trả</a>
+            <a href="terms.html"         style="font-size:0.85rem;font-weight:600;color:#6b7280;text-decoration:none;">Điều khoản</a>
+            <a href="index.html"         style="background:#065f46;color:#fff;border-radius:10px;padding:8px 20px;font-size:0.85rem;font-weight:700;text-decoration:none;">Mua ngay</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-hero__inner">
+                <div class="fade-up">
+                    <div class="about-hero__tag">🛡️ Về NhàThuốc+</div>
+                    <h1 class="about-hero__title">Chăm sóc sức khỏe<br/>của <span>mọi gia đình</span><br/>Việt Nam</h1>
+                    <p class="about-hero__desc">NhàThuốc+ ra đời với sứ mệnh đưa dịch vụ y tế chất lượng cao đến tận tay mọi người — nhanh chóng, tin cậy và luôn có mặt khi bạn cần nhất.</p>
+                </div>
+                <div class="about-hero__visual fade-up fade-up-2">🏥</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">🏠 Trang chủ</a>
+            <span class="breadcrumb__sep">›</span>
+            <span>Về chúng tôi</span>
+        </div>
+
+        <div class="stats-bar fade-up">
+            <div class="stat-item"><div class="stat-item__num">50<span>K+</span></div><div class="stat-item__label">Khách hàng tin dùng</div></div>
+            <div class="stat-item"><div class="stat-item__num">500<span>+</span></div><div class="stat-item__label">Sản phẩm chính hãng</div></div>
+            <div class="stat-item"><div class="stat-item__num">2<span>h</span></div><div class="stat-item__label">Giao hàng nhanh nhất</div></div>
+            <div class="stat-item"><div class="stat-item__num">24<span>/7</span></div><div class="stat-item__label">Dược sĩ tư vấn</div></div>
+        </div>
+
+        <section class="section">
+            <div class="mission-grid">
+                <div class="fade-up">
+                    <div class="section-label">🎯 Sứ mệnh</div>
+                    <h2 class="section-title">Tại sao chúng tôi<br/><span>làm điều này?</span></h2>
+                    <p class="section-desc">Chúng tôi tin rằng mọi người đều xứng đáng được tiếp cận thuốc chất lượng, tư vấn y tế chuyên nghiệp — không phân biệt khoảng cách hay thời gian.</p>
+                    <div class="mission-points">
+                        <div class="mission-point"><div class="mission-point__icon">🚀</div><div><div class="mission-point__title">Giao hàng trong 2 giờ</div><div class="mission-point__desc">Không cần chờ đợi — thuốc đến tay bạn nhanh nhất có thể khi bạn cần gấp.</div></div></div>
+                        <div class="mission-point"><div class="mission-point__icon">✅</div><div><div class="mission-point__title">100% hàng chính hãng</div><div class="mission-point__desc">Cam kết nhập hàng trực tiếp từ nhà sản xuất, có đầy đủ chứng nhận và xuất xứ rõ ràng.</div></div></div>
+                        <div class="mission-point"><div class="mission-point__icon">💬</div><div><div class="mission-point__title">Dược sĩ tư vấn 24/7</div><div class="mission-point__desc">Đội ngũ dược sĩ chuyên nghiệp luôn sẵn sàng giải đáp mọi thắc mắc của bạn.</div></div></div>
+                    </div>
+                </div>
+                <div class="mission-visual fade-up fade-up-2">💊</div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0">
+            <div class="values-section fade-up">
+                <div class="section-label" style="background:rgba(255,255,255,0.15);color:#6ee7b7">💎 Giá trị cốt lõi</div>
+                <h2 class="section-title" style="color:#fff">Những điều chúng tôi<br/><span style="color:#6ee7b7">luôn đặt lên hàng đầu</span></h2>
+                <p class="section-desc" style="color:rgba(255,255,255,0.75)">Mỗi quyết định, mỗi sản phẩm, mỗi dịch vụ đều được xây dựng dựa trên những giá trị cốt lõi này.</p>
+                <div class="values-grid">
+                    <div class="value-card"><div class="value-card__icon">🔒</div><div class="value-card__title">Tin cậy & Minh bạch</div><div class="value-card__desc">Mọi sản phẩm đều có nguồn gốc rõ ràng. Chúng tôi không bao giờ bán hàng giả, hàng kém chất lượng.</div></div>
+                    <div class="value-card"><div class="value-card__icon">❤️</div><div class="value-card__title">Tận tâm với khách hàng</div><div class="value-card__desc">Sức khỏe của bạn là ưu tiên số 1. Chúng tôi luôn lắng nghe và hỗ trợ bạn hết mình.</div></div>
+                    <div class="value-card"><div class="value-card__icon">⚡</div><div class="value-card__title">Nhanh chóng & Hiệu quả</div><div class="value-card__desc">Từ đặt hàng đến nhận hàng, chúng tôi tối ưu từng bước để tiết kiệm thời gian quý báu của bạn.</div></div>
+                    <div class="value-card"><div class="value-card__icon">🌱</div><div class="value-card__title">Phát triển bền vững</div><div class="value-card__desc">Cam kết đóng góp tích cực cho cộng đồng và hệ sinh thái y tế Việt Nam.</div></div>
+                    <div class="value-card"><div class="value-card__icon">🏆</div><div class="value-card__title">Chất lượng không thỏa hiệp</div><div class="value-card__desc">Tiêu chuẩn kiểm định nghiêm ngặt cho từng sản phẩm trước khi đến tay khách hàng.</div></div>
+                    <div class="value-card"><div class="value-card__icon">🤝</div><div class="value-card__title">Đồng hành lâu dài</div><div class="value-card__desc">Không chỉ bán thuốc — chúng tôi là người bạn đồng hành chăm sóc sức khỏe cả đời.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0">
+            <div class="fade-up" style="text-align:center">
+                <div class="section-label" style="justify-content:center">👥 Đội ngũ</div>
+                <h2 class="section-title" style="text-align:center">Những con người<br/><span>đằng sau NhàThuốc+</span></h2>
+                <p class="section-desc" style="margin:0 auto;text-align:center">Đội ngũ chuyên nghiệp với hơn 10 năm kinh nghiệm trong ngành dược và y tế.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card fade-up fade-up-1"><div class="team-card__avatar">👨‍⚕️</div><div class="team-card__body"><div class="team-card__name">DS. Nguyễn Minh Khoa</div><div class="team-card__role">Giám đốc điều hành</div><div class="team-card__desc">15 năm kinh nghiệm trong ngành dược phẩm và quản lý chuỗi nhà thuốc</div></div></div>
+                <div class="team-card fade-up fade-up-2"><div class="team-card__avatar">👩‍⚕️</div><div class="team-card__body"><div class="team-card__name">DS. Trần Thị Lan Anh</div><div class="team-card__role">Trưởng bộ phận Dược</div><div class="team-card__desc">Chuyên gia tư vấn thuốc với hơn 12 năm kinh nghiệm lâm sàng</div></div></div>
+                <div class="team-card fade-up fade-up-3"><div class="team-card__avatar">👨‍💻</div><div class="team-card__body"><div class="team-card__name">Lê Hoàng Nam</div><div class="team-card__role">Giám đốc Công nghệ</div><div class="team-card__desc">Kiến trúc sư hệ thống với 10 năm xây dựng nền tảng thương mại điện tử</div></div></div>
+                <div class="team-card fade-up fade-up-4"><div class="team-card__avatar">👩‍💼</div><div class="team-card__body"><div class="team-card__name">Phạm Thu Hà</div><div class="team-card__role">Giám đốc Vận hành</div><div class="team-card__desc">Chuyên gia logistics và chuỗi cung ứng, đảm bảo giao hàng nhanh và chính xác</div></div></div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0">
+            <div class="fade-up">
+                <div class="section-label">🤝 Cam kết</div>
+                <h2 class="section-title">Chúng tôi cam kết<br/><span>điều gì với bạn?</span></h2>
+            </div>
+            <div class="promise-grid">
+                <div class="promise-card fade-up fade-up-1"><div class="promise-card__icon pc-green">✅</div><div><div class="promise-card__title">Hàng chính hãng 100%</div><div class="promise-card__desc">Tất cả sản phẩm được nhập khẩu trực tiếp từ nhà sản xuất hoặc nhà phân phối ủy quyền, có đầy đủ giấy tờ kiểm định.</div></div></div>
+                <div class="promise-card fade-up fade-up-2"><div class="promise-card__icon pc-blue">🚚</div><div><div class="promise-card__title">Giao hàng trong 2 giờ</div><div class="promise-card__desc">Đối với đơn hàng trong nội thành Hà Nội, chúng tôi cam kết giao hàng trong vòng 2 giờ kể từ khi xác nhận đơn.</div></div></div>
+                <div class="promise-card fade-up fade-up-3"><div class="promise-card__icon pc-orange">🔄</div><div><div class="promise-card__title">Đổi trả dễ dàng</div><div class="promise-card__desc">Chính sách đổi trả trong 7 ngày nếu sản phẩm có lỗi hoặc không đúng mô tả. Hoàn tiền 100% không cần lý do.</div></div></div>
+                <div class="promise-card fade-up fade-up-4"><div class="promise-card__icon pc-purple">💬</div><div><div class="promise-card__title">Hỗ trợ 24/7</div><div class="promise-card__desc">Đội ngũ dược sĩ và chăm sóc khách hàng luôn trực tuyến để hỗ trợ bạn bất cứ lúc nào, kể cả đêm khuya.</div></div></div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0;padding-bottom:64px">
+            <div class="cta-section fade-up">
+                <div style="font-size:3.5rem;margin-bottom:16px">💊</div>
+                <div class="cta-section__title">Sẵn sàng chăm sóc sức khỏe<br/>cùng NhàThuốc+?</div>
+                <div class="cta-section__desc">Hàng nghìn sản phẩm chất lượng, giao hàng nhanh, dược sĩ tư vấn 24/7 — tất cả chỉ trong một ứng dụng.</div>
+                <div class="cta-btns">
+                    <a href="search.html" class="btn-g">🛒 Mua sắm ngay</a>
+                    <a href="index.html"  class="btn-w">🏠 Về trang chủ</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- FOOTER -->
+
+<footer style="background:#1a2e22;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding:48px 0 32px;">
+            <div>
+                <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:8px;">🛡️ NhàThuốc+</div>
+                <p style="font-size:0.82rem;color:#9ca3af;line-height:1.6;">Hệ thống nhà thuốc trực tuyến uy tín — giao thuốc tận nhà trong 2 giờ.</p>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Thông tin</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="about.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Về chúng tôi</a>
+                    <a href="contact.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Liên hệ</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Hỗ trợ</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                    <a href="faq.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Câu hỏi thường gặp</a>
+                    <a href="return-policy.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Chính sách đổi trả</a>
+                    <a href="terms.html" style="font-size:0.82rem;color:#9ca3af;text-decoration:none;">Điều khoản sử dụng</a>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px;">Liên hệ</div>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Hotline: <span style="color:#d1fae5;font-weight:600;">1900 xxxx</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:6px;">Email: <span style="color:#d1fae5;font-weight:600;">support@nhathuoc.vn</span></p>
+                <p style="font-size:0.82rem;color:#9ca3af;">Giờ làm việc: <span style="color:#d1fae5;font-weight:600;">24/7</span></p>
+            </div>
+        </div>
+        <div style="border-top:1px solid #2d4a38;padding:16px 0;text-align:center;font-size:0.78rem;color:#6b7280;">© 2026 NhàThuốc+. Tất cả quyền được bảo lưu.</div>
+    </div>
+</footer>
+</body>
+</html>
