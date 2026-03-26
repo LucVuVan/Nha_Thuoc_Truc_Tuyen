@@ -1,0 +1,6 @@
+/* ===== AUTH PAGE STYLES ===== */
+/* Additional styles specific to login/register pages */
+
+.auth-page-bg {
+  background: linear-gradient(135deg, #e8f5ee 0%, #d0ede0 50%, #e0f3e8 100%);
+}
