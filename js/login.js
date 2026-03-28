@@ -1,86 +1,70 @@
-// ===== login.js – NhàThuốc+ =====
+/* ===== js/login.js ===== */
 
-// ── Tab switching ──
-function switchTab(tab) {
-  const isLogin = tab === 'login';
-  document.querySelectorAll('.auth-tab').forEach((t, i) => {
-    t.classList.toggle('active', isLogin ? i === 0 : i === 1);
-  });
-  document.getElementById('panel-login').classList.toggle('active', isLogin);
-  document.getElementById('panel-register').classList.toggle('active', !isLogin);
+// Hàm chuyển tab Đăng nhập / Đăng ký
+function switchTab(tabId) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+    
+    if (tabId === 'login') {
+        document.querySelectorAll('.auth-tab')[0].classList.add('active');
+        document.getElementById('panel-login').classList.add('active');
+    } else {
+        document.querySelectorAll('.auth-tab')[1].classList.add('active');
+        document.getElementById('panel-register').classList.add('active');
+    }
 }
 
-// ── Password toggle ──
-function togglePw(id, btn) {
-  const input = document.getElementById(id);
-  const show  = input.type === 'password';
-  input.type  = show ? 'text' : 'password';
-  btn.textContent = show ? '🙈' : '👁';
+// Ẩn/hiện mật khẩu
+function togglePw(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🔒';
+    } else {
+        input.type = 'password';
+        btn.textContent = '👁';
+    }
 }
 
-// ── Đăng nhập ──
 function handleLogin(e) {
-  e.preventDefault();
-  const form  = e.target;
-  const email = form.querySelector('input[type="text"]').value.trim();
-  const pw    = form.querySelector('input[type="password"]').value;
+    e.preventDefault(); 
+    
+    const email = document.querySelector('#panel-login input[type="text"]').value;
+    const password = document.getElementById('pw-login').value;
 
-  if (!email || !pw) {
-    alert('Vui lòng nhập đầy đủ thông tin.');
-    return;
-  }
+    if (!email || !password) {
+        alert('Vui lòng nhập đầy đủ email và mật khẩu!');
+        return;
+    }
 
-  // Lấy profile đã lưu theo email
-  const savedProfile = JSON.parse(localStorage.getItem('ntp_profile_' + email) || '{}');
-  const user = {
-    ...savedProfile,
-    email,
-    name: savedProfile.name || email.split('@')[0],
-  };
-
-  // Xóa data của session cũ nếu đang login user khác
-  const prevUser = JSON.parse(localStorage.getItem('ntp_user') || 'null');
-  if (prevUser && prevUser.email !== email) {
-    // Không xóa data của prevUser, chỉ clear cart chung (không key)
-    localStorage.removeItem('ntp_cart');
-    localStorage.removeItem('ntp_orders');
-    localStorage.removeItem('ntp_notifs');
-    localStorage.removeItem('ntp_notifs_read');
-  }
-
-  localStorage.setItem('ntp_user', JSON.stringify(user));
-  window.location.href = 'index.html';
+    if (email === 'admin@nhathuoc.vn' && password === 'admin123') {
+        const adminUser = {
+            id: 'A01',
+            name: 'Admin User',
+            email: email,
+            role: 'admin' 
+        };
+        localStorage.setItem('ntp_current_user', JSON.stringify(adminUser));
+        alert('Đăng nhập Quản trị viên thành công!');
+        window.location.href = 'index.html'; 
+    } 
+    else {
+        const normalUser = {
+            id: 'U01',
+            name: 'Nguyễn Văn Khách',
+            email: email,
+            role: 'user'
+        };
+        localStorage.setItem('ntp_current_user', JSON.stringify(normalUser));
+        alert('Đăng nhập thành công!');
+        // Chuyển về trang chủ
+        window.location.href = 'index.html'; 
+    }
 }
 
-// ── Đăng ký ──
+// Xử lý Đăng ký (Giả lập)
 function handleRegister(e) {
-  e.preventDefault();
-  const form  = e.target;
-  const name  = form.querySelector('input[type="text"]').value.trim();
-  const email = form.querySelector('input[type="email"]').value.trim();
-  const pw    = document.getElementById('pw-reg').value;
-
-  if (!name || !email || !pw) {
-    alert('Vui lòng nhập đầy đủ thông tin.');
-    return;
-  }
-
-  // Xóa data chung cũ khi đăng ký user mới
-  localStorage.removeItem('ntp_cart');
-  localStorage.removeItem('ntp_orders');
-  localStorage.removeItem('ntp_notifs');
-  localStorage.removeItem('ntp_notifs_read');
-
-  const user = { name, email };
-  localStorage.setItem('ntp_user', JSON.stringify(user));
-  localStorage.setItem('ntp_profile_' + email, JSON.stringify(user));
-  window.location.href = 'index.html';
+    e.preventDefault();
+    alert('Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
+    switchTab('login');
 }
-
-// ── Nếu đã login rồi thì redirect về trang chủ ──
-(function () {
-  try {
-    const user = JSON.parse(localStorage.getItem('ntp_user') || 'null');
-    if (user) window.location.replace('index.html');
-  } catch { /* ignore */ }
-})();

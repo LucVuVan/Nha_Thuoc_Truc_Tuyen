@@ -2,15 +2,17 @@
  * admin-components.js
  * Inject sidebar trực tiếp — không dùng fetch, hoạt động cả file:// lẫn server.
  * Mỗi trang chỉ cần:
- *   <div id="sidebar-placeholder"></div>
- *   <script src="../../js/admin-components.js"></script>
+ * <div id="sidebar-placeholder"></div>
+ * <script src="../../js/admin-components.js"></script>
  */
 
 (function () {
   const SIDEBAR_HTML = `
 <aside class="admin-sidebar">
   <div class="admin-sidebar__brand">
-    <div class="admin-sidebar__brand-name">NhàThuốc+</div>
+    <a href="../index.html" style="text-decoration: none; display: block; cursor: pointer;">
+        <div class="admin-sidebar__brand-name">NhàThuốc+</div>
+    </a>    
     <div class="admin-sidebar__brand-sub">Admin Dashboard</div>
   </div>
   <nav class="admin-sidebar__nav">
