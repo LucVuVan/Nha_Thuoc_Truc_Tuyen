@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đơn hàng – NhàThuốc+</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../../css/base/global.css"/>
+  <link rel="stylesheet" href="../../css/components/badges.css"/>
+  <link rel="stylesheet" href="../../css/components/buttons.css"/>
+  <link rel="stylesheet" href="../../css/components/cards.css"/>
+  <link rel="stylesheet" href="../../css/components/forms.css"/>
+  <link rel="stylesheet" href="../../css/layout/admin.css"/>
+  <script src="../../js/admin/admin-auth.js"></script>
+  <style>
+    .order-block {
+      background:var(--white); border-radius:var(--radius-lg);
+      border:1px solid var(--border); margin-bottom:14px;
+      overflow:hidden; transition:var(--transition);
+    }
+    .order-block:hover { box-shadow:var(--shadow-md); }
+    .order-block__header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 20px; border-bottom:1px solid var(--border-light);
+    }
+    .order-block__id { font-family:var(--font-display); font-weight:700; font-size:0.95rem; }
+    .order-block__date { font-size:0.75rem; color:var(--text-muted); margin-top:2px; }
+    .order-block__amount { font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--text-primary); }
+    .order-block__pay { font-size:0.72rem; color:var(--text-muted); text-align:right; }
+    .order-block__body { padding:16px 20px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .order-block__info-label { font-size:0.72rem; color:var(--text-muted); font-weight:600; text-transform:uppercase; margin-bottom:6px; }
+    .order-block__info-val { font-size:0.85rem; font-weight:600; }
+    .order-block__info-sub { font-size:0.75rem; color:var(--text-muted); margin-top:2px; }
+    .order-block__footer { display:flex; align-items:center; justify-content:flex-end; gap:8px; padding:12px 20px; border-top:1px solid var(--border-light); background:#fafcfb; }
+    .search-filter-row { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar-placeholder"></div>
+
+  <main class="admin-main">
+    <div class="page-body">
+
+      <div class="page-header-row">
+        <div class="page-header">
+          <h1>Đơn hàng</h1>
+          <p>Quản lý và theo dõi đơn hàng</p>
+        </div>
+        <button class="btn btn-ghost btn-sm"><i class="fa-solid fa-file-arrow-down"></i> Xuất báo cáo</button>
+      </div>
+
+      <div class="stat-grid" style="margin-bottom:20px;">
+        <div class="stat-card">
+          <div class="stat-card__label">Chờ xác nhận</div>
+          <div class="stat-card__value" id="statPending" style="font-size:2rem;color:var(--warning)">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Đang xử lý</div>
+          <div class="stat-card__value" id="statProcessing" style="font-size:2rem;color:var(--info)">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Đang giao hàng</div>
+          <div class="stat-card__value" id="statDelivering" style="font-size:2rem;color:var(--primary)">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Hoàn thành hôm nay</div>
+          <div class="stat-card__value" id="statCompleted" style="font-size:2rem;color:var(--success)">0</div>
+        </div>
+      </div>
+
+      <div class="search-filter-row">
+        <div class="search-bar" style="border-radius:var(--radius-md);">
+          <span class="search-bar__icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" placeholder="Tìm kiếm theo mã đơn, tên khách hàng..."/>
+        </div>
+        <button class="btn btn-ghost btn-sm"><i class="fa-regular fa-calendar"></i> Ngày</button>
+        <button class="btn btn-ghost btn-sm"><i class="fa-solid fa-filter"></i> Lọc</button>
+      </div>
+
+      <div class="filter-tabs" style="margin-bottom:20px;">
+        <button class="filter-tab active" onclick="setFilter(this, 'all')">Tất cả</button>
+        <button class="filter-tab" onclick="setFilter(this, 'pending')">
+          <span style="display:inline-block;width:8px;height:8px;background:#f59e0b;border-radius:50%;margin-right:4px;"></span>Chờ xác nhận
+        </button>
+        <button class="filter-tab" onclick="setFilter(this, 'processing')">
+          <span style="display:inline-block;width:8px;height:8px;background:#3b82f6;border-radius:50%;margin-right:4px;"></span>Đang xử lý
+        </button>
+        <button class="filter-tab" onclick="setFilter(this, 'delivering')">
+          <span style="display:inline-block;width:8px;height:8px;background:#0369a1;border-radius:50%;margin-right:4px;"></span>Đang giao
+        </button>
+        <button class="filter-tab" onclick="setFilter(this, 'completed')">
+          <span style="display:inline-block;width:8px;height:8px;background:#15803d;border-radius:50%;margin-right:4px;"></span>Hoàn thành
+        </button>
+        <button class="filter-tab" onclick="setFilter(this, 'cancelled')">
+          <span style="display:inline-block;width:8px;height:8px;background:#dc2626;border-radius:50%;margin-right:4px;"></span>Đã hủy
+        </button>
+      </div>
+
+      <div id="ordersContainer">
+         </div>
+
+    </div>
+  </main>
+
+  <div class="help-btn"><i class="fa-solid fa-question"></i></div>
+  <script src="../../js/admin-component.js"></script>
+  <script src="../../js/admin/orders.js"></script>
+</body>
+</html>

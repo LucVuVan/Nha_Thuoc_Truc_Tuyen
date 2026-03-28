@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Danh mục – NhàThuốc+</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../../css/base/global.css"/>
+  <link rel="stylesheet" href="../../css/components/badges.css"/>
+  <link rel="stylesheet" href="../../css/components/buttons.css"/>
+  <link rel="stylesheet" href="../../css/components/cards.css"/>
+  <link rel="stylesheet" href="../../css/components/forms.css"/>
+  <link rel="stylesheet" href="../../css/layout/admin.css"/>
+  <script src="../../js/admin/admin-auth.js"></script>
+  <style>
+    .cat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px; }
+    .cat-card {
+      background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--border);
+      padding:24px 20px; transition:var(--transition); cursor:pointer;
+    }
+    .cat-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); border-color:rgba(26,140,78,0.2); }
+    .cat-card__icon { font-size:2rem; margin-bottom:12px; }
+    .cat-card__name { font-family:var(--font-display); font-size:0.95rem; font-weight:700; margin-bottom:6px; }
+    .cat-card__desc { font-size:0.75rem; color:var(--text-muted); margin-bottom:14px; line-height:1.5; }
+    .cat-card__meta { display:flex; justify-content:space-between; font-size:0.78rem; color:var(--text-secondary); }
+    .cat-card__revenue { font-weight:700; color:var(--primary); font-size:0.82rem; }
+    .cat-card__link { font-size:0.78rem; font-weight:600; color:var(--primary); margin-top:12px; display:block; }
+    .cat-card__link:hover { text-decoration:underline; }
+    .section-title-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .section-title-row h2 { font-family:var(--font-display); font-size:1rem; font-weight:700; }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar-placeholder"></div>
+
+  <main class="admin-main">
+    <div class="page-body">
+
+      <div class="page-header-row">
+        <div class="page-header">
+          <h1>Danh mục</h1>
+          <p>Quản lý danh mục sản phẩm</p>
+        </div>
+        <button class="btn btn-primary" onclick="openCategoryModal()"><i class="fa-solid fa-plus"></i> Thêm danh mục</button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Tổng danh mục</span>
+            <div class="stat-card__icon green"><i class="fa-solid fa-layer-group"></i></div>
+          </div>
+          <div class="stat-card__value" id="statTotalCat">12</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Tổng sản phẩm</span>
+            <div class="stat-card__icon blue"><i class="fa-solid fa-box-open"></i></div>
+          </div>
+          <div class="stat-card__value">1,398</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Danh mục chính</span>
+            <div class="stat-card__icon orange"><i class="fa-solid fa-folder"></i></div>
+          </div>
+          <div class="stat-card__value">8</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Danh mục con</span>
+            <div class="stat-card__icon purple"><i class="fa-solid fa-folder-open"></i></div>
+          </div>
+          <div class="stat-card__value">4</div>
+        </div>
+      </div>
+
+      <div class="search-bar" style="margin-bottom:24px; border-radius:var(--radius-md);">
+        <span class="search-bar__icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input type="text" id="catSearchInput" placeholder="Tìm kiếm danh mục..." oninput="filterCategories()"/>
+      </div>
+
+      <div class="cat-grid" id="catGrid">
+         </div>
+
+      <div class="section-title-row">
+        <h2>Xem dạng bảng</h2>
+      </div>
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Danh mục</th><th>Mô tả</th>
+              <th>Sản phẩm</th><th>Doanh thu</th>
+              <th>Trạng thái</th><th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="catTableBody">
+             </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="categoryModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:#fff; width:450px; max-width:90%; border-radius:var(--radius-lg); padding:24px; position:relative; box-shadow:var(--shadow-lg);">
+      <button onclick="closeCategoryModal()" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:1.5rem; color:var(--text-muted); cursor:pointer;">&times;</button>
+      <h2 id="catModalTitle" style="margin-bottom:20px; font-family:var(--font-display); font-size:1.2rem;">Thêm danh mục mới</h2>
+      
+      <form id="categoryForm">
+        <div style="display:grid; grid-template-columns:80px 1fr; gap:16px; margin-bottom:14px;">
+           <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Icon</label>
+              <input type="text" id="cIcon" class="form-control" required placeholder="VD: 💊" style="width:100%; padding:10px; border-radius:var(--radius-md); border:1px solid var(--border); text-align:center; font-size:1.2rem;">
+           </div>
+           <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Tên danh mục</label>
+              <input type="text" id="cName" class="form-control" required style="width:100%; padding:10px; border-radius:var(--radius-md); border:1px solid var(--border);">
+           </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:24px;">
+          <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;">Mô tả ngắn</label>
+          <input type="text" id="cDesc" class="form-control" required style="width:100%; padding:10px; border-radius:var(--radius-md); border:1px solid var(--border);">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+           <button type="button" onclick="closeCategoryModal()" class="btn btn-ghost">Hủy</button>
+           <button type="submit" class="btn btn-primary">Lưu danh mục</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="help-btn"><i class="fa-solid fa-question"></i></div>
+  <script src="../../js/admin-component.js"></script>
+  <script src="../../js/admin/categories.js"></script>
+</body>
+</html>

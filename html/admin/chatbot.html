@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cài đặt Chatbot – NhàThuốc+</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="../../css/base/global.css"/>
+  <link rel="stylesheet" href="../../css/components/badges.css"/>
+  <link rel="stylesheet" href="../../css/components/buttons.css"/>
+  <link rel="stylesheet" href="../../css/components/cards.css"/>
+  <link rel="stylesheet" href="../../css/components/forms.css"/>
+  <link rel="stylesheet" href="../../css/layout/admin.css"/>
+  <script src="../../js/admin/admin-auth.js"></script>
+  <style>
+    .chatbot-layout { display:grid; grid-template-columns:1fr 380px; gap:20px; }
+
+    /* Toggle switch */
+    .toggle-switch {
+      width: 48px; height: 26px;
+      background: var(--border);
+      border-radius: var(--radius-full);
+      position: relative; cursor: pointer;
+      transition: var(--transition); flex-shrink: 0;
+    }
+    .toggle-switch.on { background: var(--primary); }
+    .toggle-switch::after {
+      content: ''; position: absolute;
+      width: 20px; height: 20px;
+      background: var(--white); border-radius: 50%;
+      top: 3px; left: 3px;
+      transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .toggle-switch.on::after { left: 25px; }
+
+    .setting-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--border-light);
+    }
+    .setting-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .setting-row:first-child { padding-top: 0; }
+    .setting-row__label { font-size: 0.87rem; font-weight: 600; margin-bottom: 3px; }
+    .setting-row__desc { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* Quick reply items */
+    .qr-item {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border);
+    }
+    .qr-item:last-child { margin-bottom: 0; }
+    .qr-item__keyword { font-size: 0.75rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .qr-item__text { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+    .qr-item__edit { font-size: 0.72rem; font-weight: 600; color: var(--primary); cursor: pointer; margin-left: auto; }
+    .qr-item__edit:hover { text-decoration: underline; }
+
+    /* AI training table */
+    .train-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 0; border-bottom: 1px solid var(--border-light);
+    }
+    .train-row:last-child { border-bottom: none; }
+    .train-name { font-size: 0.85rem; font-weight: 600; flex: 1; }
+    .train-keywords { font-size: 0.75rem; color: var(--text-muted); flex: 1.5; }
+    .train-bar-wrap { width: 120px; }
+    .train-bar-bg { height: 6px; background: #edf2ef; border-radius: 99px; overflow: hidden; }
+    .train-bar-fill { height: 100%; background: var(--primary); border-radius: 99px; transition: width 0.3s ease; }
+    .train-percent { font-size: 0.75rem; font-weight: 700; color: var(--primary); margin-top: 3px; }
+    .train-action { font-size: 0.78rem; font-weight: 600; color: var(--primary); cursor: pointer; }
+    .train-action:hover { text-decoration: underline; }
+
+    /* Chatbot status banner */
+    .chatbot-status {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .chatbot-status__icon {
+      width: 44px; height: 44px; border-radius: var(--radius-md);
+      background: var(--primary-light); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .chatbot-status__name { font-weight: 700; font-size: 0.9rem; }
+    .chatbot-status__sub { font-size: 0.75rem; color: var(--text-muted); }
+    .chatbot-status__dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--success);
+      display: inline-block; margin-right: 5px;
+    }
+
+    .section-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .section-card__title {
+      font-family: var(--font-display);
+      font-size: 0.9rem; font-weight: 700;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .time-row { display: flex; gap: 12px; }
+    .time-row .form-group { flex: 1; }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar-placeholder"></div>
+
+  <main class="admin-main">
+    <div class="page-body">
+
+      <div class="page-header-row">
+        <div class="page-header">
+          <h1>Cài đặt Chatbot</h1>
+          <p>Cấu hình chatbot tự động hỗ trợ khách hàng</p>
+        </div>
+        <button class="btn btn-primary" onclick="saveSettings()"><i class="fa-regular fa-floppy-disk"></i> Lưu thay đổi</button>
+      </div>
+
+      <div class="chatbot-status">
+        <div class="chatbot-status__icon"><i class="fa-solid fa-robot"></i></div>
+        <div>
+          <div class="chatbot-status__name">Chatbot AI</div>
+          <div class="chatbot-status__sub" id="chatbotStatus">
+            <span class="chatbot-status__dot"></span>Đang hoạt động – Xử lý 247 hội thoại hôm nay
+          </div>
+        </div>
+        <div style="margin-left:auto;">
+          <button class="btn btn-sm" style="background:#fee2e2;color:#dc2626;border:1px solid #fecaca;" onclick="toggleChatbot(this)">
+            <i class="fa-regular fa-circle-pause"></i> Tạm dừng
+          </button>
+        </div>
+      </div>
+
+      <div class="stat-grid" style="margin-bottom:20px;">
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Hội thoại hôm nay</span>
+            <div class="stat-card__icon blue"><i class="fa-regular fa-comment-dots"></i></div>
+          </div>
+          <div class="stat-card__value">247</div>
+          <div class="stat-card__bottom">
+            <span class="stat-card__trend up"><i class="fa-solid fa-arrow-up"></i> 18% so với hôm qua</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Độ chính xác</span>
+            <div class="stat-card__icon green"><i class="fa-solid fa-bullseye"></i></div>
+          </div>
+          <div class="stat-card__value">94%</div>
+          <div class="stat-card__bottom">
+            <span style="font-size:0.72rem;color:var(--text-muted)">Hiểu đúng câu hỏi</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Thời gian phản hồi</span>
+            <div class="stat-card__icon orange"><i class="fa-regular fa-clock"></i></div>
+          </div>
+          <div class="stat-card__value">2.3s</div>
+          <div class="stat-card__bottom">
+            <span style="font-size:0.72rem;color:var(--text-muted)">Trung bình</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__top">
+            <span class="stat-card__label">Chuyển sang nhân viên</span>
+            <div class="stat-card__icon purple"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+          </div>
+          <div class="stat-card__value">12%</div>
+          <div class="stat-card__bottom">
+            <span style="font-size:0.72rem;color:var(--text-muted)">Câu hỏi phức tạp</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chatbot-layout">
+
+        <div>
+          <div class="section-card">
+            <div class="section-card__title"><i class="fa-solid fa-gear" style="color:var(--primary)"></i> Cài đặt chung</div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-row__label">Tự động trả lời</div>
+                <div class="setting-row__desc">Bot sẽ tự động phản hồi tin nhắn của khách</div>
+              </div>
+              <div class="toggle-switch on"></div>
+            </div>
+
+            <div class="setting-row">
+              <div style="flex:1;">
+                <div class="setting-row__label">Giờ làm việc</div>
+                <div class="setting-row__desc">Ngoài giờ này, bot sẽ thông báo khách hàng để lại tin nhắn</div>
+                <div class="time-row" style="margin-top:10px;">
+                  <div class="form-group">
+                    <label class="form-label" style="font-size:0.75rem;">Từ</label>
+                    <input type="text" class="form-control" value="07:00 AM" style="font-size:0.85rem;"/>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" style="font-size:0.75rem;">Đến</label>
+                    <input type="text" class="form-control" value="10:00 PM" style="font-size:0.85rem;"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div style="flex:1;">
+                <div class="setting-row__label">Tin nhắn chào mừng</div>
+                <div class="setting-row__desc">Hiển thị khi khách mở chat lần đầu</div>
+                <textarea class="form-control" rows="3" style="margin-top:10px;font-size:0.85rem;">Xin chào! Tôi là trợ lý ảo của NhàThuốc+. Tôi có thể giúp gì cho bạn hôm nay?</textarea>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div style="flex:1;">
+                <div class="setting-row__label">Chuyển sang nhân viên sau</div>
+                <div class="setting-row__desc">Khi bot không hiểu câu hỏi</div>
+                <select class="form-control" style="margin-top:10px;font-size:0.85rem;width:auto;">
+                  <option>3 tin nhắn không hiểu</option>
+                  <option>5 tin nhắn không hiểu</option>
+                  <option>Ngay lập tức nếu yêu cầu</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card__title"><i class="fa-solid fa-brain" style="color:var(--primary)"></i> Ý định học được (AI Training)</div>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:16px;">Hệ thống AI tự học và nhận diện ý định của khách hàng</p>
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--bg);">
+                  <th style="text-align:left;padding:8px 10px;font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Tên ý định</th>
+                  <th style="text-align:left;padding:8px 10px;font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Từ khóa</th>
+                  <th style="text-align:left;padding:8px 10px;font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Độ tin cậy</th>
+                  <th style="text-align:left;padding:8px 10px;font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="intentsBody">
+                 </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-card" style="height:fit-content;">
+            <div class="section-card__title">
+              <i class="fa-regular fa-comment" style="color:var(--primary)"></i>
+              Câu trả lời nhanh
+              <a class="table-card__link" style="margin-left:auto;font-size:0.75rem;cursor:pointer;" onclick="addQuickReply()">+ Thêm mới</a>
+            </div>
+            <div id="quickRepliesList" style="max-height:480px;overflow-y:auto;padding-right:4px;">
+               </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <div class="help-btn"><i class="fa-solid fa-question"></i></div>
+  <script src="../../js/admin-component.js"></script>
+  <script src="../../js/admin/chatbot.js"></script>
+</body>
+</html>

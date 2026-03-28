@@ -13,13 +13,13 @@
   <link rel="stylesheet" href="../../css/components/cards.css"/>
   <link rel="stylesheet" href="../../css/components/forms.css"/>
   <link rel="stylesheet" href="../../css/layout/admin.css"/>
+  <script src="../../js/admin/admin-auth.js"></script>
 </head>
 <body>
 
   <div id="sidebar-placeholder"></div>
 
   <main class="admin-main">
-
     <div class="alert-bar">
       <i class="fa-solid fa-triangle-exclamation"></i>
       Cảnh báo: 3 lô thuốc sẽ hết hạn trong 30 ngày.
@@ -27,7 +27,6 @@
     </div>
 
     <div class="page-body">
-
       <div class="page-header">
         <h1>Dashboard</h1>
         <p>Tổng quan hoạt động hôm nay – 15/03/2026</p>
@@ -90,56 +89,12 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th>Mã đơn</th>
-                <th>Khách hàng</th>
-                <th>Sản phẩm</th>
-                <th>Tổng tiền</th>
-                <th>Trạng thái</th>
-                <th></th>
+                <th>Mã đơn</th><th>Khách hàng</th><th>Sản phẩm</th>
+                <th>Tổng tiền</th><th>Trạng thái</th><th></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><span class="order-id">DH-2024-1847</span></td>
-                <td><span class="customer-name">Nguyễn Văn A</span></td>
-                <td>Paracetamol 500mg</td>
-                <td><span class="order-amount">450,000đ</span></td>
-                <td><span class="status-badge pending">Chờ xác nhận</span></td>
-                <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-              </tr>
-              <tr>
-                <td><span class="order-id">DH-2024-1846</span></td>
-                <td><span class="customer-name">Trần Thị B</span></td>
-                <td>Vitamin C 1000mg</td>
-                <td><span class="order-amount">1,200,000đ</span></td>
-                <td><span class="status-badge delivering">Đang giao</span></td>
-                <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-              </tr>
-              <tr>
-                <td><span class="order-id">DH-2024-1845</span></td>
-                <td><span class="customer-name">Lê Văn C</span></td>
-                <td>Amoxicillin 500mg</td>
-                <td><span class="order-amount">320,000đ</span></td>
-                <td><span class="status-badge completed">Hoàn thành</span></td>
-                <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-              </tr>
-              <tr>
-                <td><span class="order-id">DH-2024-1844</span></td>
-                <td><span class="customer-name">Phạm Thị D</span></td>
-                <td>Omeprazole 20mg</td>
-                <td><span class="order-amount">580,000đ</span></td>
-                <td><span class="status-badge completed">Hoàn thành</span></td>
-                <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-              </tr>
-              <tr>
-                <td><span class="order-id">DH-2024-1843</span></td>
-                <td><span class="customer-name">Hoàng Văn E</span></td>
-                <td>Ibuprofen 400mg</td>
-                <td><span class="order-amount">250,000đ</span></td>
-                <td><span class="status-badge cancelled">Đã hủy</span></td>
-                <td><button class="action-btn"><i class="fa-regular fa-eye"></i></button></td>
-              </tr>
-            </tbody>
+            <tbody id="orderTableBody">
+               </tbody>
           </table>
         </div>
 
@@ -147,113 +102,16 @@
           <div class="top5-card__header">
             <div class="top5-card__title">Top 5 thuốc bán chạy</div>
           </div>
-          <div class="top5-list">
-            <div class="top5-item">
-              <div class="top5-rank r1">1</div>
-              <div class="top5-info">
-                <div class="top5-name">Paracetamol 500mg</div>
-                <div class="top5-sold">1,247 đã bán</div>
-              </div>
-              <div class="top5-bar-wrap">
-                <div class="top5-bar-bg"><div class="top5-bar-fill" style="width:100%"></div></div>
-              </div>
-            </div>
-            <div class="top5-item">
-              <div class="top5-rank r2">2</div>
-              <div class="top5-info">
-                <div class="top5-name">Vitamin C 1000mg</div>
-                <div class="top5-sold">982 đã bán</div>
-              </div>
-              <div class="top5-bar-wrap">
-                <div class="top5-bar-bg"><div class="top5-bar-fill" style="width:79%"></div></div>
-              </div>
-            </div>
-            <div class="top5-item">
-              <div class="top5-rank r3">3</div>
-              <div class="top5-info">
-                <div class="top5-name">Amoxicillin 500mg</div>
-                <div class="top5-sold">856 đã bán</div>
-              </div>
-              <div class="top5-bar-wrap">
-                <div class="top5-bar-bg"><div class="top5-bar-fill" style="width:69%"></div></div>
-              </div>
-            </div>
-            <div class="top5-item">
-              <div class="top5-rank r4">4</div>
-              <div class="top5-info">
-                <div class="top5-name">Omeprazole 20mg</div>
-                <div class="top5-sold">723 đã bán</div>
-              </div>
-              <div class="top5-bar-wrap">
-                <div class="top5-bar-bg"><div class="top5-bar-fill" style="width:58%"></div></div>
-              </div>
-            </div>
-            <div class="top5-item">
-              <div class="top5-rank r5">5</div>
-              <div class="top5-info">
-                <div class="top5-name">Ibuprofen 400mg</div>
-                <div class="top5-sold">645 đã bán</div>
-              </div>
-              <div class="top5-bar-wrap">
-                <div class="top5-bar-bg"><div class="top5-bar-fill" style="width:52%"></div></div>
-              </div>
-            </div>
-          </div>
+          <div class="top5-list" id="top5List">
+             </div>
         </div>
       </div>
-
     </div>
   </main>
 
   <div class="help-btn"><i class="fa-solid fa-question"></i></div>
 
-  <script src="../../js/admin-components.js"></script>
-  <script>
-    const ctx = document.getElementById('revenueChart').getContext('2d');
-    const grad = ctx.createLinearGradient(0, 0, 0, 220);
-    grad.addColorStop(0, 'rgba(26,140,78,0.15)');
-    grad.addColorStop(1, 'rgba(26,140,78,0)');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['09/03','10/03','11/03','12/03','13/03','14/03','15/03'],
-        datasets: [{
-          data: [44, 51, 55, 60, 63, 66, 72.5],
-          borderColor: '#1a8c4e',
-          borderWidth: 2.5,
-          backgroundColor: grad,
-          fill: true,
-          tension: 0.45,
-          pointRadius: 4,
-          pointBackgroundColor: '#fff',
-          pointBorderColor: '#1a8c4e',
-          pointBorderWidth: 2,
-          pointHoverRadius: 6,
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: { label: c => `${c.parsed.y}M đồng` },
-            backgroundColor: '#162620',
-            titleColor: '#fff',
-            bodyColor: '#5de89a',
-            padding: 10,
-            cornerRadius: 8,
-          }
-        },
-        scales: {
-          x: { grid: { display: false }, ticks: { color: '#8aaa97', font: { size: 11 } } },
-          y: {
-            min: 0, max: 80,
-            ticks: { color: '#8aaa97', font: { size: 11 }, callback: v => v + 'M' },
-            grid: { color: '#edf5f0' }
-          }
-        }
-      }
-    });
-  </script>
+  <script src="../../js/admin-component.js"></script>
+  <script src="../../js/admin/dashboard.js"></script> 
 </body>
 </html>
