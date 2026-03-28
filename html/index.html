@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="../css/pages/chat.css" />
     <style>
         /* ═══════════════════════════════════
+           FIX LỖI LAYOUT BỊ ÉP THÀNH CỘT NGANG
+           ═══════════════════════════════════ */
+        body {
+            display: block !important;
+        }
+
+        /* ═══════════════════════════════════
            HERO MỚI
            ═══════════════════════════════════ */
         .hero-new {
@@ -216,7 +223,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
     <div class="header__inner">
         <a href="index.html" class="header__logo">
@@ -234,6 +240,7 @@
             <div id="header-guest">
                 <a href="login.html" class="btn btn-primary btn-sm">Đăng nhập</a>
             </div>
+            
             <div id="header-user" class="header-user" style="display:none">
                 <div class="notif-wrap" id="notifWrap">
                     <button class="header-icon-btn" id="notifBtn" onclick="toggleNotif()">
@@ -262,6 +269,11 @@
                             <div class="user-menu__name" id="menu-name">Người dùng</div>
                             <div class="user-menu__email" id="menu-email"></div>
                         </div>
+                        
+                        <div class="user-menu__divider" id="adminNavDivider" style="display:none"></div>
+                        <a href="admin/dashboard.html" class="user-menu__item" id="adminNavButton" style="display:none; color: var(--primary); font-weight: bold; background: var(--primary-light);">
+                            🛡️ Vào Trang Quản Trị
+                        </a>
                         <div class="user-menu__divider"></div>
                         <a href="orders.html" class="user-menu__item">📦 Đơn hàng của tôi</a>
                         <a href="settings.html" class="user-menu__item">⚙️ Cài đặt tài khoản</a>
@@ -277,10 +289,8 @@
 <main>
     <div class="container">
 
-        <!-- ═══ HERO ═══ -->
         <section class="section" style="margin-bottom:0">
             <div class="hero-new">
-                <!-- Slide 1 – Xanh emerald -->
                 <div class="hero-slide hero-slide--1 active">
                     <div class="hero-content">
                         <div class="hero-tag-new">🚀 Nhanh nhất Hà Nội</div>
@@ -291,7 +301,6 @@
                     <div class="hero-visual-new">🚚</div>
                 </div>
 
-                <!-- Slide 2 – Cam rực -->
                 <div class="hero-slide hero-slide--2">
                     <div class="hero-content">
                         <div class="hero-tag-new">💊 Flash Sale hôm nay</div>
@@ -302,7 +311,6 @@
                     <div class="hero-visual-new">⚡</div>
                 </div>
 
-                <!-- Slide 3 – Tím indigo -->
                 <div class="hero-slide hero-slide--3">
                     <div class="hero-content">
                         <div class="hero-tag-new">👨‍⚕️ Tư vấn miễn phí</div>
@@ -323,7 +331,6 @@
             </div>
         </section>
 
-        <!-- ═══ SHORTCUT ═══ -->
         <section class="section" style="padding-top:18px; margin-bottom:0">
             <div class="shortcut-bar">
                 <a href="search.html" class="shortcut-item">
@@ -349,7 +356,6 @@
             </div>
         </section>
 
-        <!-- CATEGORIES -->
         <section class="section">
             <div class="section-header">
                 <h2 class="section-title">Danh mục sản phẩm</h2>
@@ -364,7 +370,6 @@
             </div>
         </section>
 
-        <!-- FLASH SALE -->
         <section id="flash-sale" class="flash-sale-section">
             <div class="flash-sale-header">
                 <div class="flash-sale-left">
@@ -396,7 +401,6 @@
             </div>
         </section>
 
-        <!-- FEATURES BAR -->
         <div class="features-bar">
             <div class="feature-item"><div class="feature-item__icon green">🚚</div><div><div class="feature-item__title">Giao hàng nhanh</div><div class="feature-item__desc">Giao trong 2 giờ</div></div></div>
             <div class="feature-item"><div class="feature-item__icon blue">🛡️</div><div><div class="feature-item__title">100% chính hãng</div><div class="feature-item__desc">Cam kết chất lượng</div></div></div>
@@ -415,7 +419,6 @@
     </div>
 </footer>
 
-<!-- CHAT FAB -->
 <button class="chat-fab" id="chatFab" onclick="toggleChat()">
     <span class="chat-fab__badge" id="chatBadge">1</span>
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -460,6 +463,44 @@
 <script src="../js/index.js"></script>
 <script src="../js/chat.js"></script>
 <script>
+    // BƯỚC 2: LOGIC HIỂN THỊ TÀI KHOẢN VÀ NÚT ADMIN
+    document.addEventListener('DOMContentLoaded', () => {
+        const userStr = localStorage.getItem('ntp_current_user');
+        
+        if (userStr) {
+            try {
+                const currentUser = JSON.parse(userStr);
+                
+                // Hiển thị phần menu người dùng (ẩn phần Đăng nhập)
+                document.getElementById('header-guest').style.display = 'none';
+                const headerUser = document.getElementById('header-user');
+                if (headerUser) headerUser.style.display = 'flex';
+                
+                // Cập nhật Tên & Chữ cái đầu Avatar
+                document.getElementById('menu-name').textContent = currentUser.name;
+                document.getElementById('menu-email').textContent = currentUser.email;
+                document.getElementById('avatar-letter').textContent = currentUser.name.charAt(0).toUpperCase();
+
+                // NẾU LÀ ADMIN -> Mở khóa nút "Vào Trang Quản Trị"
+                if (currentUser.role === 'admin') {
+                    document.getElementById('adminNavDivider').style.display = 'block';
+                    document.getElementById('adminNavButton').style.display = 'block';
+                }
+            } catch (e) {
+                console.error("Lỗi parse thông tin đăng nhập");
+            }
+        }
+    });
+
+    // Hàm Đăng xuất
+    function logout() {
+        if (confirm('Bạn có chắc chắn muốn đăng xuất không?')) {
+            localStorage.removeItem('ntp_current_user');
+            window.location.reload(); // Tải lại trang (nút đăng nhập sẽ hiện lại)
+        }
+    }
+    // ==========================================
+
     // Hero slider
     let heroCur = 0;
     const heroSlides = document.querySelectorAll('.hero-slide');
