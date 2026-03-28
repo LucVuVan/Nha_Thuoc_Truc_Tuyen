@@ -21,7 +21,12 @@ body {
   background: linear-gradient(180deg, #d4f0e2 0%, #eaf6f0 18%, #f5f9f6 40%, #ffffff 100%);
   min-height: 100vh;
 }
-
+body {
+    display: block !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-height: 100vh;
+}
 /* Footer */
 .footer {
   background: var(--text-primary);
